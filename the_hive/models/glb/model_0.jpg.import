@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cj04wh4rsixdu"
-path.s3tc="res://.godot/imported/model_1.png-6c9e5746f65a47d88929e79d0b41a5ff.s3tc.ctex"
+uid="uid://66dk6nnn670o"
+path.s3tc="res://.godot/imported/model_0.jpg-06a7f847ea72f7a689cce905f0a72539.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -14,8 +14,8 @@ generator_parameters={
 
 [deps]
 
-source_file="res://the_hive/model_1.png"
-dest_files=["res://.godot/imported/model_1.png-6c9e5746f65a47d88929e79d0b41a5ff.s3tc.ctex"]
+source_file="res://the_hive/models/glb/model_0.jpg"
+dest_files=["res://.godot/imported/model_0.jpg-06a7f847ea72f7a689cce905f0a72539.s3tc.ctex"]
 
 [params]
 

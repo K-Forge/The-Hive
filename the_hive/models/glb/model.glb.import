@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://c5bcg4gqugxqe"
-path="res://.godot/imported/model.fbx-6f4667bf4b042a590c90f3048d78411e.scn"
+uid="uid://cwtvltmip6fs2"
+path="res://.godot/imported/model.glb-8016d98e92074b877e08a2f54b4b2191.scn"
 
 [deps]
 
-source_file="res://the_hive/model.fbx"
-dest_files=["res://.godot/imported/model.fbx-6f4667bf4b042a590c90f3048d78411e.scn"]
+source_file="res://the_hive/models/glb/model.glb"
+dest_files=["res://.godot/imported/model.glb-8016d98e92074b877e08a2f54b4b2191.scn"]
 
 [params]
 
@@ -32,7 +32,7 @@ meshes/force_disable_compression=false
 skins/use_named_skins=true
 animation/import=true
 animation/fps=30
-animation/trimming=true
+animation/trimming=false
 animation/remove_immutable_tracks=true
 animation/import_rest_as_RESET=false
 import_script/path=""
@@ -40,7 +40,6 @@ materials/extract=0
 materials/extract_format=0
 materials/extract_path=""
 _subresources={}
-fbx/importer=0
-fbx/allow_geometry_helper_nodes=false
-fbx/embedded_image_handling=1
-fbx/naming_version=2
+gltf/naming_version=2
+gltf/embedded_image_handling=1
+gltf/texture_map_mode=1
