@@ -1,0 +1,12 @@
+[gd_resource type="ORMMaterial3D" format=3 uid="uid://djjfgbkvqh42h"]
+
+[ext_resource type="Texture2D" uid="uid://cativ38swtuyr" path="res://assets/3DModels/EOATSuction/Textures/EOAT_Trim_BaseColor.png" id="1_1vnoy"]
+[ext_resource type="Texture2D" uid="uid://dq706juex6os3" path="res://assets/3DModels/EOATSuction/Textures/EOAT_Trim_Normal.png" id="2_ahttr"]
+[ext_resource type="Texture2D" uid="uid://b3r6vw1vrsb5c" path="res://assets/3DModels/EOATSuction/Textures/EOAT_Trim_ORM.png" id="3_7bnp0"]
+
+[resource]
+albedo_texture = ExtResource("1_1vnoy")
+orm_texture = ExtResource("3_7bnp0")
+normal_enabled = true
+normal_texture = ExtResource("2_ahttr")
+ao_enabled = true

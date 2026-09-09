@@ -1,0 +1,5 @@
+[gd_resource type="PhysicsMaterial" format=3 uid="uid://b3p4q5r6s7t8u"]
+
+[resource]
+resource_name = "BeltSurfaceMaterial"
+friction = 0.5

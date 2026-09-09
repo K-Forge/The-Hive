@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://xu7wrqfyycmm"]
+
+[ext_resource type="ArrayMesh" uid="uid://bw2k2nh1ti8vh" path="res://assets/3DModels/WallsAndRoof/Meshes/Roof_A.res" id="1_cnxxc"]
+[ext_resource type="ArrayMesh" uid="uid://lnx271kny3cn" path="res://assets/3DModels/WallsAndRoof/Meshes/Roof_B.res" id="2_v1av6"]
+
+[node name="RoofLibrary" type="Node3D" unique_id=1334510999]
+
+[node name="RoofA" type="MeshInstance3D" parent="." unique_id=90477021]
+mesh = ExtResource("1_cnxxc")
+
+[node name="RoofB" type="MeshInstance3D" parent="." unique_id=261679403]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 0)
+mesh = ExtResource("2_v1av6")

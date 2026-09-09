@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="StackSegmentData" format=3 uid="uid://ff1xcf7jap8r"]
+
+[ext_resource type="Script" uid="uid://buet0tp11gjdl" path="res://src/StackLight/stack_segment_data.gd" id="1_1p7i5"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_1p7i5")

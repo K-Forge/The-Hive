@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://bpy7qmkwijctd"]
+
+[ext_resource type="ArrayMesh" uid="uid://8xjir7f2v521" path="res://assets/3DModels/WallsAndRoof/Meshes/Wall_A.res" id="1_7fsfj"]
+[ext_resource type="ArrayMesh" uid="uid://dy04hyed5okp1" path="res://assets/3DModels/WallsAndRoof/Meshes/Wall_B.res" id="2_otgjc"]
+[ext_resource type="ArrayMesh" uid="uid://dsvoasexkp77n" path="res://assets/3DModels/WallsAndRoof/Meshes/Wall_C.res" id="3_4mjut"]
+[ext_resource type="ArrayMesh" uid="uid://cfwiyklg4dtat" path="res://assets/3DModels/WallsAndRoof/Meshes/Wall_D.res" id="4_d820h"]
+
+[node name="WallLibrary" type="Node3D" unique_id=2003731577]
+
+[node name="WallA" type="MeshInstance3D" parent="." unique_id=399665155]
+mesh = ExtResource("1_7fsfj")
+
+[node name="WallB" type="MeshInstance3D" parent="." unique_id=1128607503]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 0)
+mesh = ExtResource("2_otgjc")
+
+[node name="WallC" type="MeshInstance3D" parent="." unique_id=1888867367]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 0)
+mesh = ExtResource("3_4mjut")
+
+[node name="WallD" type="MeshInstance3D" parent="." unique_id=1375380430]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 0)
+mesh = ExtResource("4_d820h")

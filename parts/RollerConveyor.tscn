@@ -1,0 +1,59 @@
+[gd_scene format=4 uid="uid://dg47c07xr4ksu"]
+
+[ext_resource type="Script" uid="uid://c3i26qc2exbsa" path="res://src/RollerConveyor/roller_conveyor.gd" id="1_vnty6"]
+[ext_resource type="Shader" uid="uid://cfcar2nye4ktk" path="res://src/Conveyor/conveyor_frame_shader.gdshader" id="2_sau1a"]
+[ext_resource type="PackedScene" uid="uid://d4bf4if1fpy0t" path="res://src/RollerConveyor/Roller.tscn" id="2_v7a13"]
+[ext_resource type="Texture2D" uid="uid://b4rg48iqr8l2g" path="res://assets/3DModels/Textures/Metal.png" id="3_enukr"]
+[ext_resource type="Script" uid="uid://bvq8mmr0llerz" path="res://src/RollerConveyor/multi_mesh_rollers.gd" id="3_peu56"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sau1a"]
+render_priority = 0
+shader = ExtResource("2_sau1a")
+shader_parameter/metal_texture = ExtResource("3_enukr")
+shader_parameter/color = Color(0.337, 0.655, 0.784, 1)
+shader_parameter/metallic_value = 0.8
+shader_parameter/roughness_value = 0.4
+shader_parameter/specular_value = 0.5
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_enukr"]
+_surfaces = [{
+"aabb": AABB(-2, 0, -0.02, 4, 0.505, 0.03),
+"attribute_data": PackedByteArray("AAAAAAAAAAAAAAAACtcjPAAAgEAK1yM8AACAQAAAAAAAAAAAAAAAAAAAAAAAAAA/AACAQAAAAD8AAIBAAAAAAAAAAAAAAAAAAAAAAADXozsAAIBAANejOwAAgEAAAAAAAAAAAAAAAAAAAAAAj8L1PAAAgECPwvU8AACAQAAAAAAAAAAAAAAAAAAAAAAA16M7AACAQADXozsAAIBAAAAAAAAAAAAAAAAAAAAAAArXozwAAIBACtejPAAAgEAAAAAAAAAAAAAAAAAAAAAAAAAAPwAAgEAAAAA/AACAQAAAAAAAAAAAAAAAAArXIzwAAAAACtcjPAAAAD8K1yM8rkcBPwrXo7yuRwE/CtejvAAAAD8AAAAAAAAAPwAAAAAAAAAACtcjPAAAAAAK1yM8AAAAPwrXIzyuRwE/CtejvK5HAT8K16O8AAAAPwAAAAAAAAA/"),
+"format": 34359742487,
+"index_count": 72,
+"index_data": PackedByteArray("AAABAAIAAAACAAMABAAFAAYABAAGAAcACAAJAAoACAAKAAsADAANAA4ADAAOAA8AEAARABIAEAASABMAFAAVABYAFAAWABcAGAAZABoAGAAaABsAHAAeAB0AHAAiAB4AIgAfAB4AIgAgAB8AIgAhACAAIwAkACUAIwAlACkAKQAlACYAKQAmACcAKQAnACgA"),
+"material": SubResource("ShaderMaterial_sau1a"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 42,
+"vertex_data": PackedByteArray("AAAAQAAAAAAAAAAAAAAAQAAAAAAK1yM8AAAAwAAAAAAK1yM8AAAAwAAAAAAAAAAAAAAAQAAAAAAK1yM8AAAAQAAAAD8K1yM8AAAAwAAAAD8K1yM8AAAAwAAAAAAK1yM8AAAAQAAAAD8K1yM8AAAAQK5HAT8K1yM8AAAAwK5HAT8K1yM8AAAAwAAAAD8K1yM8AAAAQK5HAT8K1yM8AAAAQK5HAT8K16O8AAAAwK5HAT8K16O8AAAAwK5HAT8K1yM8AAAAQK5HAT8K16O8AAAAQAAAAD8K16O8AAAAwAAAAD8K16O8AAAAwK5HAT8K16O8AAAAQAAAAD8K16O8AAAAQAAAAD8AAAAAAAAAwAAAAD8AAAAAAAAAwAAAAD8K16O8AAAAQAAAAD8AAAAAAAAAQAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAAwAAAAD8AAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAK1yM8AAAAQAAAAD8K1yM8AAAAQK5HAT8K1yM8AAAAQK5HAT8K16O8AAAAQAAAAD8K16O8AAAAQAAAAD8AAAAAAAAAwAAAAAAAAAAAAAAAwAAAAAAK1yM8AAAAwAAAAD8K1yM8AAAAwK5HAT8K1yM8AAAAwK5HAT8K16O8AAAAwAAAAD8K16O8AAAAwAAAAD8AAAAA/38AAAAA/7//fwAAAAD/v/9/AAAAAP+//38AAAAA/7//f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3///wAA/7//f///AAD/v/9///8AAP+//3///wAA/7///////38AgP//////fwCA//////9/AID//////38AgP9/AAAAAP+//38AAAAA/7//fwAAAAD/v/9/AAAAAP+///////9/AID//////38AgP//////fwCA//////9/AID///9//3//v////3//f/+/////f/9//7////9//3//v////3//f/+/////f/9//7////9//3//vwAA/3//f/+/AAD/f/9//78AAP9//3//vwAA/3//f/+/AAD/f/9//78AAP9//3//vwAA/3//f/+/")
+}]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xuflt"]
+size = Vector3(4, 0.5, 1.524)
+
+[node name="RollerConveyor" type="Node3D" unique_id=75041265]
+script = ExtResource("1_vnty6")
+size = Vector3(4, 0.5, 1.524)
+
+[node name="ConvRoller" type="Node3D" parent="." unique_id=1108873219]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+
+[node name="ConvRollerL" type="MeshInstance3D" parent="ConvRoller" unique_id=1157690109]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.772)
+mesh = SubResource("ArrayMesh_enukr")
+
+[node name="ConvRollerR" type="MeshInstance3D" parent="ConvRoller" unique_id=566155853]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0.772)
+mesh = SubResource("ArrayMesh_enukr")
+
+[node name="Rollers" type="Node3D" parent="." unique_id=433067636]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8, -0.12, 0)
+script = ExtResource("3_peu56")
+roller_scene = ExtResource("2_v7a13")
+
+[node name="SimpleConveyorShape" type="StaticBody3D" parent="." unique_id=399847013]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SimpleConveyorShape" unique_id=1219873187]
+shape = SubResource("BoxShape3D_xuflt")

@@ -1,0 +1,15 @@
+[gd_resource type="ORMMaterial3D" format=3 uid="uid://xv78osseudt"]
+
+[ext_resource type="Texture2D" uid="uid://cjchhlwgv2udg" path="res://assets/3DModels/DockDoor/Textures/DockDoor_01_Door_BaseColor.png" id="1_nii3o"]
+[ext_resource type="Texture2D" uid="uid://dtdvhoqsca2qr" path="res://assets/3DModels/DockDoor/Textures/DockDoor_01_Door_Normal.png" id="2_dk3rx"]
+[ext_resource type="Texture2D" uid="uid://tt1qtfao6px0" path="res://assets/3DModels/DockDoor/Textures/DockDoor_01_Door_ORM.png" id="3_k1ray"]
+
+[resource]
+albedo_texture = ExtResource("1_nii3o")
+orm_texture = ExtResource("3_k1ray")
+normal_enabled = true
+normal_texture = ExtResource("2_dk3rx")
+rim_enabled = true
+rim = 0.8
+rim_tint = 0.75
+ao_enabled = true

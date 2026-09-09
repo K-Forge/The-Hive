@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://c1rr86kk8qdrc"]
+
+[ext_resource type="PackedScene" uid="uid://jdrtb1rq4j5d" path="res://assets/3DModels/WallsAndRoof/Light_A.glb" id="1_ws5op"]
+[ext_resource type="Material" uid="uid://dwtalgpn7kh16" path="res://assets/3DModels/WallsAndRoof/Materials/Building_Light_A.tres" id="2_57jcp"]
+
+[node name="Light_A" unique_id=2115389050 instance=ExtResource("1_ws5op")]
+
+[node name="Light_01" parent="." index="0" unique_id=1573827670]
+surface_material_override/0 = ExtResource("2_57jcp")

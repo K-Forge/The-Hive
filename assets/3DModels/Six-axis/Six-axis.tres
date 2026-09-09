@@ -1,0 +1,12 @@
+[gd_resource type="ORMMaterial3D" format=3 uid="uid://34n2h21bulxr"]
+
+[ext_resource type="Texture2D" uid="uid://gr53hwj8wftk" path="res://assets/3DModels/Six-axis/Textures/Six-Axis_01_BaseColor.png" id="1_cfo78"]
+[ext_resource type="Texture2D" uid="uid://bkalrmv40vhy3" path="res://assets/3DModels/Six-axis/Textures/Six-Axis_01_Normal.png" id="2_lolje"]
+[ext_resource type="Texture2D" uid="uid://bt1nsm5dexlha" path="res://assets/3DModels/Six-axis/Textures/Six-Axis_01_ORM.png" id="3_ecvx3"]
+
+[resource]
+albedo_texture = ExtResource("1_cfo78")
+orm_texture = ExtResource("3_ecvx3")
+normal_enabled = true
+normal_texture = ExtResource("2_lolje")
+ao_enabled = true

@@ -1,0 +1,36 @@
+[gd_scene format=4 uid="uid://8f8up7qexq4i"]
+
+[ext_resource type="Script" uid="uid://csafetygate1gd" path="res://src/SafetyGate/safety_gate.gd" id="1_sgate"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_leaf"]
+size = Vector3(0.92, 2, 0.06)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_interact"]
+size = Vector3(1, 2, 0.3)
+
+[node name="SafetyGate" type="Node3D" unique_id=1810000001]
+script = ExtResource("1_sgate")
+size = Vector3(1, 2, 0.06)
+metadata/hijack_scale = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1810000002]
+
+[node name="Leaf" type="Node3D" parent="." unique_id=1810000003]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Leaf" unique_id=1810000004]
+
+[node name="LeafBody" type="StaticBody3D" parent="Leaf" unique_id=1810000005]
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Leaf/LeafBody" unique_id=1810000006]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1, 0)
+shape = SubResource("BoxShape3D_leaf")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1810000007]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1810000008]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_interact")

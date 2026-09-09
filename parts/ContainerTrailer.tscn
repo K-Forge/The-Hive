@@ -1,0 +1,75 @@
+[gd_scene format=3 uid="uid://uaw4it12hrad"]
+
+[ext_resource type="Material" uid="uid://bohi0kia7f23k" path="res://assets/3DModels/ContainerTrailer/Materials/ContainerTrailer_Chassis.tres" id="1_cpre4"]
+[ext_resource type="ArrayMesh" uid="uid://bs3gyy27vi8m7" path="res://assets/3DModels/ContainerTrailer/Meshes/Chassis.res" id="2_vcoeb"]
+[ext_resource type="Material" uid="uid://ce6cs3w2w0rkp" path="res://assets/3DModels/ContainerTrailer/Materials/ContainerTrailer_Container.tres" id="3_5g70a"]
+[ext_resource type="Script" uid="uid://d0mqaw381vg14" path="res://src/ContainerTrailer/ContainerTrailer.gd" id="3_vcoeb"]
+[ext_resource type="ArrayMesh" uid="uid://bfteanmdvmuf5" path="res://assets/3DModels/ContainerTrailer/Meshes/Container.res" id="4_72erb"]
+[ext_resource type="ArrayMesh" uid="uid://c037ew0ulufqw" path="res://assets/3DModels/ContainerTrailer/Meshes/Door_Left.res" id="5_st8lr"]
+[ext_resource type="ArrayMesh" uid="uid://dg1ruwh302chj" path="res://assets/3DModels/ContainerTrailer/Meshes/Door_Right.res" id="6_hd2uu"]
+[ext_resource type="Material" uid="uid://byvw1hwf27gq3" path="res://assets/3DModels/ContainerTrailer/Materials/ContainerTrailer_Interior.tres" id="7_vx88d"]
+[ext_resource type="ArrayMesh" uid="uid://dbdhao1k4wv6l" path="res://assets/3DModels/ContainerTrailer/Meshes/Interior.res" id="8_7pq1b"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_floor"]
+size = Vector3(2.344, 0.2, 12.087)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ceiling"]
+size = Vector3(2.344, 0.1, 11.471)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wall"]
+size = Vector3(0.1, 2.319, 11.471)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_front"]
+size = Vector3(2.344, 2.319, 0.1)
+
+[node name="ContainerTrailer" type="Node3D" unique_id=1654464612]
+script = ExtResource("3_vcoeb")
+doors_open = true
+open_angle = 240.0
+
+[node name="Chassis" type="MeshInstance3D" parent="." unique_id=1987680020]
+material_override = ExtResource("1_cpre4")
+mesh = ExtResource("2_vcoeb")
+
+[node name="Container" type="MeshInstance3D" parent="Chassis" unique_id=1073440303]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.443, 0)
+material_override = ExtResource("3_5g70a")
+mesh = ExtResource("4_72erb")
+
+[node name="Interior" type="MeshInstance3D" parent="Chassis/Container" unique_id=715251654]
+material_override = ExtResource("7_vx88d")
+mesh = ExtResource("8_7pq1b")
+
+[node name="Door_Left" type="MeshInstance3D" parent="Chassis/Container" unique_id=674527699]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.182, 1.2930001, -6.06)
+material_override = ExtResource("3_5g70a")
+mesh = ExtResource("5_st8lr")
+
+[node name="Door_Right" type="MeshInstance3D" parent="Chassis/Container" unique_id=1078597186]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.182, 1.2930001, -6.06)
+material_override = ExtResource("3_5g70a")
+mesh = ExtResource("6_hd2uu")
+
+[node name="Collision" type="StaticBody3D" parent="."]
+collision_layer = 1
+collision_mask = 0
+
+[node name="Floor" type="CollisionShape3D" parent="Collision"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.526, -0.5565)
+shape = SubResource("BoxShape3D_floor")
+
+[node name="Ceiling" type="CollisionShape3D" parent="Collision"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.995, -0.2485)
+shape = SubResource("BoxShape3D_ceiling")
+
+[node name="WallRight" type="CollisionShape3D" parent="Collision"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.222, 2.7855, -0.2485)
+shape = SubResource("BoxShape3D_wall")
+
+[node name="WallLeft" type="CollisionShape3D" parent="Collision"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.222, 2.7855, -0.2485)
+shape = SubResource("BoxShape3D_wall")
+
+[node name="Front" type="CollisionShape3D" parent="Collision"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7855, 5.537)
+shape = SubResource("BoxShape3D_front")

@@ -1,0 +1,58 @@
+name: Bug report
+description: Report a bug in Open Industry Project
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a bug!
+
+        **Paste system info from `Help → Copy System Info`**
+        This includes version, build, and platform details.
+
+        Please provide clear reproduction steps.
+
+  - type: textarea
+    id: system_info
+    attributes:
+      label: System info
+      description: Paste directly from **Help → Copy System Info**.
+      render: shell
+      placeholder: "Open Industry Project v4.6-dev…"
+    validations:
+      required: true
+
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Open editor
+        2. Create new project
+        3. Add <part>
+        4. Press Play
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected result
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual result
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Errors / logs (if any)
+      render: shell
+    validations:
+      required: false

@@ -1,0 +1,13 @@
+[gd_resource type="ORMMaterial3D" format=3 uid="uid://dp0lp56t036ue"]
+
+[ext_resource type="Texture2D" uid="uid://dm1apr5rfljvn" path="res://assets/3DModels/WallsAndRoof/Textures/BuildingPart_Floor_A_BaseColor.png" id="1_njox0"]
+[ext_resource type="Texture2D" uid="uid://dsxqvn1l0d7e6" path="res://assets/3DModels/WallsAndRoof/Textures/BuildingPart_Floor_A_Normal.png" id="2_duy6p"]
+[ext_resource type="Texture2D" uid="uid://cpqvnl04g6xk" path="res://assets/3DModels/WallsAndRoof/Textures/BuildingPart_Floor_A_ORM.png" id="3_mvi7d"]
+
+[resource]
+disable_ambient_light = true
+albedo_texture = ExtResource("1_njox0")
+orm_texture = ExtResource("3_mvi7d")
+normal_enabled = true
+normal_texture = ExtResource("2_duy6p")
+ao_enabled = true

@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://di5cldbnuv77q"]
+
+[ext_resource type="ArrayMesh" uid="uid://b7rs2r4b6a4yt" path="res://assets/3DModels/DockDoor/Meshes/DockDoor_Wall_B.res" id="1_77x0s"]
+[ext_resource type="Material" uid="uid://d75277i0h50j" path="res://assets/3DModels/WallsAndRoof/Materials/Building_Wall_02.tres" id="2_5xfq1"]
+[ext_resource type="Material" uid="uid://cofn0jsa8u8yl" path="res://assets/3DModels/WallsAndRoof/Materials/Building_Framing_01.tres" id="3_ci445"]
+[ext_resource type="Material" uid="uid://xv78osseudt" path="res://assets/3DModels/DockDoor/Materials/DockDoor.tres" id="4_avpwf"]
+
+[node name="DockDoor_Wall_B" type="Node3D" unique_id=365884926]
+
+[node name="DockDoor_Wall_B" type="MeshInstance3D" parent="." unique_id=381878515]
+mesh = ExtResource("1_77x0s")
+surface_material_override/0 = ExtResource("2_5xfq1")
+surface_material_override/1 = ExtResource("3_ci445")
+surface_material_override/2 = ExtResource("4_avpwf")

@@ -1,0 +1,579 @@
+{
+  "$comment": "CANONICAL single source of truth for OIP web <-> Godot-native scene transfer. Imported by the web round-trip test (src/interop) AND vendored verbatim into the Godot repo (Open-Industry-Project/src/interop/part_mapping.json) so the GDScript bridge applies the same mapping. Adding/renaming a param on either surface without updating this file should make the round-trip golden test fail. See docs/scene-interop.md.",
+  "version": 1,
+  "coordinateSystem": {
+    "units": "meters",
+    "handedness": "right",
+    "axes": "+X flow, +Y up, +Z side",
+    "eulerOrder": "YXZ",
+    "$comment": "Web stores position[3] + rotationY/X/Z (radians, YXZ). Godot stores Transform3D(basis, origin). transform.ts ports three.js Euler 'YXZ' <-> Godot Basis.from_euler(.., EULER_ORDER_YXZ)."
+  },
+  "convertKinds": {
+    "identity": "value copied verbatim (number/bool/string/array)",
+    "color": "web '#rrggbb' / '#rrggbbaa' <-> Godot Color (alpha auto-detected: dropped when 1.0)",
+    "enumMap": "web enum string <-> Godot enum int via the per-param enumMap table",
+    "segments": "web [{length, tiltDeg}] <-> Godot Array[BeltSegment] [{length, tilt_relative_deg}]",
+    "tagFanout": "web single `tag` string -> the Godot `godot` field AND every field in `alsoGodot`",
+    "partRef": "web part id <-> Godot NodePath/Node3D (resolved two-pass on import, read back on export)",
+    "degToRad": "web degrees <-> Godot radians (Godot stores some angles via deg_to_rad())",
+    "vec3": "several web scalars <-> components of one Godot Vector3 property (e.g. size); each param names its `component` x|y|z. Godot size convention: x=length, y=height, z=width."
+  },
+  "parts": {
+    "roller_conveyor": {
+      "status": "mapped",
+      "godotScene": "res://parts/RollerConveyor.tscn",
+      "godotScript": "res://src/RollerConveyor/roller_conveyor.gd",
+      "params": [
+        { "web": "length", "godot": "length", "convert": "identity" },
+        { "web": "width", "godot": "width", "convert": "identity" },
+        { "web": "speed", "godot": "speed", "convert": "identity" },
+        { "web": "tiltDeg", "godot": "incline_deg", "convert": "identity" },
+        { "web": "leftGuard", "godot": "left_side_guards_enabled", "convert": "identity" },
+        { "web": "rightGuard", "godot": "right_side_guards_enabled", "convert": "identity" },
+        { "web": "rollerClass", "godot": "roller_class", "convert": "enumMap", "enumMap": { "light": 0, "medium": 1, "heavy": 2 } },
+        { "web": "enableComms", "godot": "enable_comms", "convert": "identity" },
+        { "web": "tag", "godot": "speed_tag_name", "convert": "tagFanout", "alsoGodot": ["running_tag_name"] }
+      ],
+      "godotOnly": ["height", "skew_angle", "cargo_align_strength", "physics_material", "side_guard_openings", "legs_enabled", "floor_plane", "leg_model_scene", "tail_end_leg_enabled", "tail_end_attachment_offset", "tail_end_leg_clearance", "head_end_leg_enabled", "head_end_attachment_offset", "head_end_leg_clearance", "middle_legs_enabled", "middle_legs_spacing", "exclusion_start", "exclusion_end"],
+      "webOnly": [],
+      "notes": ["Web roller has no leg model; Godot roller does (defaults on).", "tiltDeg (web) <-> incline_deg (Godot): whole-run incline about the cross-belt axis, tail-pivoted. Distinct from skew_angle (a HORIZONTAL roller cant)."]
+    },
+    "belt_conveyor": {
+      "status": "mapped",
+      "godotScene": "res://parts/BeltConveyor.tscn",
+      "godotScript": "res://src/Conveyor/belt_conveyor.gd",
+      "params": [
+        { "web": "shapePreset", "godot": "shape_preset", "convert": "enumMap", "enumMap": { "custom": 0, "straight": 1, "zframe": 2, "walkthru": 3, "noseover": 4 } },
+        { "web": "segments", "godot": "segments", "convert": "segments" },
+        { "web": "width", "godot": "width", "convert": "identity" },
+        { "web": "height", "godot": "height", "convert": "identity" },
+        { "web": "speed", "godot": "speed", "convert": "identity" },
+        { "web": "beltColor", "godot": "belt_color", "convert": "color" },
+        { "web": "beltTexture", "godot": "belt_texture", "convert": "enumMap", "enumMap": { "standard": 0, "alternate": 1 } },
+        { "web": "frameRailsEnabled", "godot": "frame_rails_enabled", "convert": "identity" },
+        { "web": "leftGuard", "godot": "left_side_guards_enabled", "convert": "identity" },
+        { "web": "rightGuard", "godot": "right_side_guards_enabled", "convert": "identity" },
+        { "web": "guardOpenings", "godot": "side_guard_openings", "convert": "identity", "note": "Round-trips verbatim; Godot SideGuardOpening field names not audited yet." },
+        { "web": "legsEnabled", "godot": "legs_enabled", "convert": "identity" },
+        { "web": "tailLegEnabled", "godot": "tail_end_leg_enabled", "convert": "identity" },
+        { "web": "tailLegOffset", "godot": "tail_end_attachment_offset", "convert": "identity" },
+        { "web": "tailLegClearance", "godot": "tail_end_leg_clearance", "convert": "identity" },
+        { "web": "headLegEnabled", "godot": "head_end_leg_enabled", "convert": "identity" },
+        { "web": "headLegOffset", "godot": "head_end_attachment_offset", "convert": "identity" },
+        { "web": "headLegClearance", "godot": "head_end_leg_clearance", "convert": "identity" },
+        { "web": "middleLegsEnabled", "godot": "middle_legs_enabled", "convert": "identity" },
+        { "web": "middleLegsSpacing", "godot": "middle_legs_spacing", "convert": "identity" },
+        { "web": "exclusionStart", "godot": "exclusion_start", "convert": "identity" },
+        { "web": "exclusionEnd", "godot": "exclusion_end", "convert": "identity" },
+        { "web": "enableComms", "godot": "enable_comms", "convert": "identity" },
+        { "web": "tag", "godot": "speed_tag_name", "convert": "tagFanout", "alsoGodot": ["running_tag_name"] }
+      ],
+      "godotOnly": ["physics_material", "floor_plane", "leg_model_scene"],
+      "webOnly": []
+    },
+    "curved_roller_conveyor": {
+      "status": "mapped",
+      "godotScene": "res://parts/CurvedRollerConveyor.tscn",
+      "godotScript": "res://src/RollerConveyor/curved_roller_conveyor.gd",
+      "params": [
+        { "web": "innerRadius", "godot": "inner_radius", "convert": "identity" },
+        { "web": "width", "godot": "width", "convert": "identity" },
+        { "web": "sweepDeg", "godot": "conveyor_angle", "convert": "identity" },
+        { "web": "speed", "godot": "speed", "convert": "identity" },
+        { "web": "innerGuard", "godot": "inner_side_guards_enabled", "convert": "identity" },
+        { "web": "outerGuard", "godot": "outer_side_guards_enabled", "convert": "identity" },
+        { "web": "rollerClass", "godot": "roller_class", "convert": "enumMap", "enumMap": { "light": 0, "medium": 1, "heavy": 2 } },
+        { "web": "enableComms", "godot": "enable_comms", "convert": "identity" },
+        { "web": "tag", "godot": "speed_tag_name", "convert": "tagFanout", "alsoGodot": ["running_tag_name"] }
+      ],
+      "godotOnly": ["height", "reverse", "reference_distance", "physics_material", "side_guard_openings", "legs_enabled", "floor_plane", "leg_model_scene"],
+      "webOnly": []
+    },
+    "curved_belt_conveyor": {
+      "status": "mapped",
+      "godotScene": "res://parts/CurvedBeltConveyor.tscn",
+      "godotScript": "res://src/Conveyor/curved_belt_conveyor.gd",
+      "params": [
+        { "web": "innerRadius", "godot": "inner_radius", "convert": "identity" },
+        { "web": "width", "godot": "width", "convert": "identity" },
+        { "web": "sweepDeg", "godot": "conveyor_angle", "convert": "identity" },
+        { "web": "speed", "godot": "speed", "convert": "identity" },
+        { "web": "beltColor", "godot": "belt_color", "convert": "color" },
+        { "web": "innerGuard", "godot": "inner_side_guards_enabled", "convert": "identity" },
+        { "web": "outerGuard", "godot": "outer_side_guards_enabled", "convert": "identity" },
+        { "web": "enableComms", "godot": "enable_comms", "convert": "identity" },
+        { "web": "tag", "godot": "speed_tag_name", "convert": "tagFanout", "alsoGodot": ["running_tag_name"] }
+      ],
+      "godotOnly": ["height", "reverse", "reference_distance", "belt_texture", "physics_material", "side_guard_openings", "legs_enabled", "floor_plane", "leg_model_scene"],
+      "webOnly": []
+    },
+    "spur_roller_conveyor": {
+      "status": "mapped",
+      "godotScene": "res://parts/RollerSpurConveyor.tscn",
+      "godotScript": "res://src/RollerConveyor/roller_spur_conveyor.gd",
+      "params": [
+        { "web": "length", "godot": "length", "convert": "identity" },
+        { "web": "width", "godot": "width", "convert": "identity" },
+        { "web": "speed", "godot": "speed", "convert": "identity" },
+        { "web": "angleFrontDeg", "godot": "angle_downstream", "convert": "degToRad" },
+        { "web": "angleBackDeg", "godot": "angle_upstream", "convert": "degToRad" },
+        { "web": "leftGuard", "godot": "left_side_guards_enabled", "convert": "identity" },
+        { "web": "rightGuard", "godot": "right_side_guards_enabled", "convert": "identity" },
+        { "web": "rollerClass", "godot": "roller_class", "convert": "enumMap", "enumMap": { "light": 0, "medium": 1, "heavy": 2 } },
+        { "web": "enableComms", "godot": "enable_comms", "convert": "identity" },
+        { "web": "tag", "godot": "speed_tag_name", "convert": "tagFanout", "alsoGodot": ["running_tag_name"] }
+      ],
+      "godotOnly": ["height", "frame_rails_enabled", "physics_material", "side_guard_openings", "side_guard_snap_extents", "legs_enabled", "floor_plane", "leg_model_scene"],
+      "webOnly": []
+    },
+    "spur_belt_conveyor": {
+      "status": "mapped",
+      "godotScene": "res://parts/BeltSpurConveyor.tscn",
+      "godotScript": "res://src/Conveyor/belt_spur_conveyor.gd",
+      "params": [
+        { "web": "length", "godot": "length", "convert": "identity" },
+        { "web": "width", "godot": "width", "convert": "identity" },
+        { "web": "speed", "godot": "speed", "convert": "identity" },
+        { "web": "conveyorCount", "godot": "conveyor_count", "convert": "identity" },
+        { "web": "angleFrontDeg", "godot": "angle_downstream", "convert": "degToRad" },
+        { "web": "angleBackDeg", "godot": "angle_upstream", "convert": "degToRad" },
+        { "web": "beltColor", "godot": "belt_color", "convert": "color" },
+        { "web": "leftGuard", "godot": "left_side_guards_enabled", "convert": "identity" },
+        { "web": "rightGuard", "godot": "right_side_guards_enabled", "convert": "identity" },
+        { "web": "enableComms", "godot": "enable_comms", "convert": "identity" },
+        { "web": "tag", "godot": "speed_tag_name", "convert": "tagFanout", "alsoGodot": ["running_tag_name"] }
+      ],
+      "godotOnly": ["height", "frame_color", "belt_texture", "frame_rails_enabled", "physics_material", "side_guard_openings", "side_guard_snap_extents", "legs_enabled", "floor_plane", "leg_model_scene"],
+      "webOnly": []
+    },
+    "turntable_conveyor": {
+      "status": "mapped",
+      "godotScene": "res://parts/TurntableConveyor.tscn",
+      "godotScript": "res://src/TurntableConveyor/turntable_conveyor.gd",
+      "params": [
+        { "web": "width", "godot": "width", "convert": "identity" },
+        { "web": "speed", "godot": "speed", "convert": "identity" },
+        { "web": "deckAngleDeg", "godot": "target_angle", "convert": "identity" },
+        { "web": "rollerClass", "godot": "roller_class", "convert": "enumMap", "enumMap": { "light": 0, "medium": 1, "heavy": 2 } },
+        { "web": "enableComms", "godot": "enable_comms", "convert": "identity" },
+        { "web": "tag", "godot": "speed_tag_name", "convert": "identity" },
+        { "web": "angleTag", "godot": "target_angle_tag_name", "convert": "identity" }
+      ],
+      "godotOnly": ["height", "rotation_speed", "physics_material", "legs_enabled", "leg_count", "floor_plane", "leg_model_scene"],
+      "webOnly": [],
+      "notes": ["target_angle is stored in degrees on both sides (identity). Turntable's speed tag is single (no running fan-out)."]
+    },
+    "chain_transfer": {
+      "status": "mapped",
+      "godotScene": "res://parts/ChainTransfer.tscn",
+      "godotScript": "res://src/ChainTransfer/chain_transfer.gd",
+      "params": [
+        { "web": "chains", "godot": "chains", "convert": "identity" },
+        { "web": "laneDistance", "godot": "distance", "convert": "identity" },
+        { "web": "laneLength", "godot": "lane_length", "convert": "identity" },
+        { "web": "speed", "godot": "speed", "convert": "identity" },
+        { "web": "raised", "godot": "popup_chains", "convert": "identity" },
+        { "web": "enableComms", "godot": "enable_comms", "convert": "identity" },
+        { "web": "tag", "godot": "speed_tag_name", "convert": "identity" },
+        { "web": "popupTag", "godot": "popup_tag_name", "convert": "identity" }
+      ],
+      "godotOnly": [],
+      "webOnly": [],
+      "notes": ["laneLength <-> lane_length, a metres facade over the native scale.z (a size property added to chain_transfer.gd so size isn't carried in the transform scale)."]
+    },
+    "diverter": {
+      "status": "mapped",
+      "godotScene": "res://parts/Diverter.tscn",
+      "godotScript": "res://src/Diverter/diverter.gd",
+      "params": [
+        { "web": "divertTime", "godot": "divert_time", "convert": "identity" },
+        { "web": "divertDistance", "godot": "divert_distance", "convert": "identity" },
+        { "web": "enableComms", "godot": "enable_comms", "convert": "identity" },
+        { "web": "tag", "godot": "tag_name", "convert": "identity" }
+      ],
+      "godotOnly": ["divert_action", "tag_group_name"],
+      "webOnly": ["diverted"],
+      "notes": ["Web `diverted` is runtime state with no Godot export (Godot fires via an internal flag)."]
+    },
+    "blade_stop": {
+      "status": "mapped",
+      "godotScene": "res://parts/BladeStop.tscn",
+      "godotScript": "res://src/BladeStop/blade_stop.gd",
+      "importOriginOffset": [-0.0464, -0.188, 0],
+      "params": [
+        { "web": "width", "godot": "width", "convert": "identity" },
+        { "web": "active", "godot": "active", "convert": "identity" },
+        { "web": "raiseHeight", "godot": "air_pressure_height", "convert": "identity" },
+        { "web": "enableComms", "godot": "enable_comms", "convert": "identity" },
+        { "web": "tag", "godot": "tag_name", "convert": "identity" }
+      ],
+      "godotOnly": ["tag_group_name"],
+      "webOnly": [],
+      "notes": ["width <-> width, a metres facade over the native scale.z (the cross-belt blade span; same dimension the web `width` drives). Godot snap auto-fits scale.z on drag, but not on import.", "importOriginOffset [x,y,z] local-frame delta reconciling the native .tscn origin (GLB origin) with the web's: x=-0.1036 (NATIVE_BLADE_X — the web re-centers its model onto the blade, bladeStop.ts); y=-0.42 (the native snap seats the housing this far below the belt, ConveyorSnapFeatures.BLADE_STOP_TARGET_LOCAL_Y — the web puts the origin AT the belt). Importer adds it, exporter subtracts it (exact round-trip); snap-on-drag re-derives position so it's unaffected. NOTE: the native model is the detailed pneumatic mechanism; the web is a SIMPLIFIED stand-in (housing hidden below belt) — so they look different by design even when correctly placed."]
+    },
+    "box_spawner": {
+      "status": "mapped",
+      "godotScene": "res://parts/BoxSpawner.tscn",
+      "godotScript": "res://src/BoxSpawner/box_spawner.gd",
+      "params": [
+        { "web": "boxesPerMinute", "godot": "boxes_per_minute", "convert": "identity" },
+        { "web": "fixedRate", "godot": "fixed_rate", "convert": "identity" },
+        { "web": "boxColor", "godot": "box_color", "convert": "color" },
+        { "web": "mass", "godot": "mass", "convert": "identity" },
+        { "web": "randomSize", "godot": "random_size", "convert": "identity" },
+        { "web": "disable", "godot": "disable", "convert": "identity" },
+        { "web": "conveyorId", "godot": "conveyor", "convert": "partRef" }
+      ],
+      "godotOnly": ["scene", "initial_linear_velocity", "random_size_min", "random_size_max", "random_mass", "random_mass_min", "random_mass_max"],
+      "webOnly": ["boxColors", "randomColors"],
+      "notes": ["conveyorId<->conveyor is the partRef<->NodePath bridge. Web boxColors/randomColors have no Godot equivalent.", "The web sim matches desktop on first-spawn timing (first box on the first sim step) and on the default random_size range ([0.4,0.3,0.3]..[0.8,0.5,0.5]). Per-spawner random_size_min/max, random_mass*, and initial_linear_velocity aren't web-sim-configurable yet but round-trip losslessly via the _godotExtra passthrough (see pallet_spawner notes).", "Web-only by design: a +/-0.05 m XZ spawn jitter (anti-stacking, since the web doesn't gate emission on belt clearance) and a 200-body cap (MAX_BOXES, a browser/mobile perf guard; native relies on Despawner zones instead)."]
+    },
+    "pallet_spawner": {
+      "status": "mapped",
+      "godotScene": "res://parts/PalletSpawner.tscn",
+      "godotScript": "res://src/PalletSpawner/pallet_spawner.gd",
+      "params": [
+        { "web": "palletsPerMinute", "godot": "pallets_per_minute", "convert": "identity" },
+        { "web": "fixedRate", "godot": "fixed_rate", "convert": "identity" },
+        { "web": "disable", "godot": "disable", "convert": "identity" },
+        { "web": "mass", "godot": "mass", "convert": "identity" },
+        { "web": "conveyorId", "godot": "conveyor", "convert": "partRef" }
+      ],
+      "godotOnly": ["scene", "spawn_initial_linear_velocity"],
+      "webOnly": [],
+      "notes": ["Native pallet_spawner now has a conveyor interlock (conveyorId<->conveyor partRef) and a per-pallet mass override, matching the web.", "_godotExtra passthrough (all part types): scene_io.gd emits each godotOnly prop a part carries (here spawn_initial_linear_velocity) into params._godotExtra on export and re-applies it on import, and stashes unmapped web params as the oip_web_extra node meta, so a round-trip through either tool is lossless even for one-sided fields."]
+    },
+    "despawner": {
+      "status": "draft",
+      "godotScene": "res://parts/Despawner.tscn",
+      "godotScript": "res://src/Despawner/despawner.gd",
+      "params": [],
+      "godotOnly": ["monitoring"],
+      "webOnly": ["length", "height", "width"],
+      "notes": ["DEFERRED: Godot despawner has no size export — its box size lives in the node's Transform3D SCALE, which the bridge's transform path doesn't carry yet (rotation-only basis). Needs scale support before mapping length/height/width."]
+    },
+    "color_sensor": {
+      "status": "mapped",
+      "godotScene": "res://parts/ColorSensor.tscn",
+      "godotScript": "res://src/ColorSensor/color_sensor.gd",
+      "params": [
+        { "web": "maxRange", "godot": "max_range", "convert": "identity" },
+        { "web": "showBeam", "godot": "show_beam", "convert": "identity" },
+        { "web": "enableComms", "godot": "enable_comms", "convert": "identity" },
+        { "web": "tag", "godot": "tag_name", "convert": "identity" }
+      ],
+      "godotOnly": ["color_detected", "color_map", "color_value", "tag_group_name"],
+      "webOnly": []
+    },
+    "laser_sensor": {
+      "status": "mapped",
+      "godotScene": "res://parts/LaserSensor.tscn",
+      "godotScript": "res://src/LaserSensor/laser_sensor.gd",
+      "params": [
+        { "web": "maxRange", "godot": "max_range", "convert": "identity" },
+        { "web": "showBeam", "godot": "show_beam", "convert": "identity" },
+        { "web": "enableComms", "godot": "enable_comms", "convert": "identity" },
+        { "web": "tag", "godot": "tag_name", "convert": "identity" }
+      ],
+      "godotOnly": ["distance", "tag_group_name"],
+      "webOnly": []
+    },
+    "diffuse_sensor": {
+      "status": "mapped",
+      "godotScene": "res://parts/DiffuseSensor.tscn",
+      "godotScript": "res://src/DiffuseSensor/diffuse_sensor.gd",
+      "params": [
+        { "web": "maxRange", "godot": "max_range", "convert": "identity" },
+        { "web": "showBeam", "godot": "show_beam", "convert": "identity" },
+        { "web": "normallyClosed", "godot": "normally_closed", "convert": "identity" },
+        { "web": "enableComms", "godot": "enable_comms", "convert": "identity" },
+        { "web": "tag", "godot": "tag_name", "convert": "identity" }
+      ],
+      "godotOnly": ["detected", "output", "tag_group_name"],
+      "webOnly": []
+    },
+    "push_button": {
+      "status": "mapped",
+      "godotScene": "res://parts/PushButton.tscn",
+      "godotScript": "res://src/PushButton/push_button.gd",
+      "params": [
+        { "web": "text", "godot": "text", "convert": "identity" },
+        { "web": "buttonColor", "godot": "button_color", "convert": "color" },
+        { "web": "lamp", "godot": "lamp", "convert": "identity" },
+        { "web": "pressed", "godot": "pressed", "convert": "identity" },
+        { "web": "toggle", "godot": "toggle", "convert": "identity" },
+        { "web": "normallyClosed", "godot": "normally_closed", "convert": "identity" },
+        { "web": "enableComms", "godot": "enable_comms", "convert": "identity" },
+        { "web": "tag", "godot": "pushbutton_tag_name", "convert": "identity" }
+      ],
+      "godotOnly": ["output", "pushbutton_tag_group_name", "lamp_tag_group_name", "lamp_tag_name"],
+      "webOnly": []
+    },
+    "safety_gate": {
+      "status": "mapped",
+      "godotScene": "res://parts/SafetyGate.tscn",
+      "godotScript": "res://src/SafetyGate/safety_gate.gd",
+      "params": [
+        { "web": "length", "godot": "size", "convert": "vec3", "component": "x" },
+        { "web": "open", "godot": "open", "convert": "identity" },
+        { "web": "openAngle", "godot": "open_angle", "convert": "identity" },
+        { "web": "normallyClosed", "godot": "normally_closed", "convert": "identity" },
+        { "web": "postColor", "godot": "post_color", "convert": "color" },
+        { "web": "meshColor", "godot": "mesh_color", "convert": "color" },
+        { "web": "handleColor", "godot": "handle_color", "convert": "color" },
+        { "web": "omitPostStart", "godot": "omit_post_start", "convert": "identity" },
+        { "web": "omitPostEnd", "godot": "omit_post_end", "convert": "identity" },
+        { "web": "enableComms", "godot": "enable_comms", "convert": "identity" },
+        { "web": "tag", "godot": "gate_tag_name", "convert": "identity" }
+      ],
+      "godotOnly": ["open_speed", "output", "gate_tag_group_name"],
+      "webOnly": []
+    },
+    "guard_rail": {
+      "status": "mapped",
+      "godotScene": "res://parts/GuardRail.tscn",
+      "godotScript": "res://src/GuardRail/guard_rail.gd",
+      "params": [
+        { "web": "length", "godot": "size", "convert": "vec3", "component": "x" },
+        { "web": "color", "godot": "steel_color", "convert": "color" },
+        { "web": "omitPostStart", "godot": "omit_post_start", "convert": "identity" },
+        { "web": "omitPostEnd", "godot": "omit_post_end", "convert": "identity" }
+      ],
+      "godotOnly": [],
+      "webOnly": []
+    },
+    "fence": {
+      "status": "mapped",
+      "godotScene": "res://parts/Fence.tscn",
+      "godotScript": "res://src/Fence/fence.gd",
+      "params": [
+        { "web": "length", "godot": "size", "convert": "vec3", "component": "x" },
+        { "web": "height", "godot": "size", "convert": "vec3", "component": "y" },
+        { "web": "postColor", "godot": "post_color", "convert": "color" },
+        { "web": "meshColor", "godot": "mesh_color", "convert": "color" },
+        { "web": "omitPostStart", "godot": "omit_post_start", "convert": "identity" },
+        { "web": "omitPostEnd", "godot": "omit_post_end", "convert": "identity" }
+      ],
+      "godotOnly": [],
+      "webOnly": []
+    },
+    "floor_marking": {
+      "status": "mapped",
+      "godotScene": "res://parts/FloorMarking.tscn",
+      "godotScript": "res://src/FloorMarking/floor_marking.gd",
+      "params": [
+        { "web": "length", "godot": "size", "convert": "vec3", "component": "x" },
+        { "web": "width", "godot": "size", "convert": "vec3", "component": "z" },
+        { "web": "style", "godot": "style", "convert": "enumMap", "enumMap": { "solid": 0, "hazard": 1, "dashed": 2, "border": 3, "stripes": 4 } },
+        { "web": "stripeSize", "godot": "stripe_size", "convert": "identity" },
+        { "web": "borderWidth", "godot": "border_width", "convert": "identity" },
+        { "web": "primaryColor", "godot": "primary_color", "convert": "color" },
+        { "web": "secondaryColor", "godot": "secondary_color", "convert": "color" }
+      ],
+      "godotOnly": ["height_offset"],
+      "webOnly": []
+    },
+    "platform": {
+      "status": "mapped",
+      "godotScene": "res://parts/Platform.tscn",
+      "godotScript": "res://src/Platform/platform.gd",
+      "params": [
+        { "web": "length", "godot": "size", "convert": "vec3", "component": "x" },
+        { "web": "height", "godot": "size", "convert": "vec3", "component": "y" },
+        { "web": "width", "godot": "size", "convert": "vec3", "component": "z" },
+        { "web": "showRailings", "godot": "show_railings", "convert": "identity" },
+        { "web": "showSupports", "godot": "show_middle_supports", "convert": "identity" },
+        { "web": "color", "godot": "steel_color", "convert": "color" }
+      ],
+      "godotOnly": ["floor_y"],
+      "webOnly": []
+    },
+    "stairs": {
+      "status": "mapped",
+      "godotScene": "res://parts/Stairs.tscn",
+      "godotScript": "res://src/Stairs/stairs.gd",
+      "params": [
+        { "web": "length", "godot": "size", "convert": "vec3", "component": "x" },
+        { "web": "height", "godot": "size", "convert": "vec3", "component": "y" },
+        { "web": "width", "godot": "size", "convert": "vec3", "component": "z" },
+        { "web": "showHandrails", "godot": "show_handrails", "convert": "identity" },
+        { "web": "color", "godot": "steel_color", "convert": "color" }
+      ],
+      "godotOnly": ["floor_y"],
+      "webOnly": []
+    },
+    "rack": {
+      "status": "mapped",
+      "godotScene": "res://parts/Rack.tscn",
+      "godotScript": "res://src/Rack/rack.gd",
+      "params": [
+        { "web": "length", "godot": "size", "convert": "vec3", "component": "x" },
+        { "web": "width", "godot": "size", "convert": "vec3", "component": "z" },
+        { "web": "numShelves", "godot": "num_shelves", "convert": "identity" },
+        { "web": "shelfSpacing", "godot": "shelf_spacing", "convert": "identity" },
+        { "web": "enableAutoPoles", "godot": "enable_auto_poles", "convert": "identity" },
+        { "web": "poleInterval", "godot": "pole_interval", "convert": "identity" },
+        { "web": "shelfColor", "godot": "shelf_color", "convert": "color" },
+        { "web": "frameColor", "godot": "frame_color", "convert": "color" }
+      ],
+      "godotOnly": [],
+      "webOnly": [],
+      "notes": ["Godot rack size.y is derived from num_shelves * shelf_spacing; the bridge does not set the Y component (web has no rack height param)."]
+    },
+    "box": {
+      "status": "mapped",
+      "godotScene": "res://parts/Box.tscn",
+      "godotScript": "res://src/Box/Box.gd",
+      "params": [
+        { "web": "length", "godot": "size", "convert": "vec3", "component": "x" },
+        { "web": "height", "godot": "size", "convert": "vec3", "component": "y" },
+        { "web": "width", "godot": "size", "convert": "vec3", "component": "z" },
+        { "web": "mass", "godot": "mass", "convert": "identity" },
+        { "web": "color", "godot": "color", "convert": "color" }
+      ],
+      "godotOnly": ["initial_linear_velocity"],
+      "webOnly": []
+    },
+    "pallet": {
+      "status": "mapped",
+      "godotScene": "res://parts/Pallet.tscn",
+      "godotScript": "res://src/Pallet/pallet.gd",
+      "params": [
+        { "web": "color", "godot": "color", "convert": "color" }
+      ],
+      "godotOnly": ["initial_linear_velocity"],
+      "webOnly": ["mass"],
+      "notes": ["Godot pallet has no mass export (fixed mass)."]
+    },
+    "group": {
+      "status": "mapped",
+      "godotScene": "",
+      "params": [],
+      "godotOnly": [],
+      "webOnly": [],
+      "notes": ["Web-only soft-parent anchor. Imported as a bare Node3D (no .tscn); identified on export by the oip_type metadata tag, not scene_file_path."]
+    },
+    "despawner": {
+      "status": "mapped",
+      "godotScene": "res://parts/Despawner.tscn",
+      "godotScript": "res://src/Despawner/despawner.gd",
+      "params": [
+        { "web": "length", "godot": "scale", "convert": "vec3", "component": "x" },
+        { "web": "height", "godot": "scale", "convert": "vec3", "component": "y" },
+        { "web": "width", "godot": "scale", "convert": "vec3", "component": "z" }
+      ],
+      "godotOnly": ["monitoring"],
+      "webOnly": [],
+      "notes": ["Godot despawner has no size export; size lives in the node Transform3D SCALE (vec3 -> scale). Export reads an orthonormalized basis so scale doesn't pollute the rotation."]
+    },
+    "stack_light": {
+      "status": "mapped",
+      "godotScene": "res://parts/StackLight.tscn",
+      "godotScript": "res://src/StackLight/stack_light.gd",
+      "params": [
+        { "web": "lights", "godot": "segments", "convert": "stackLights" },
+        { "web": "enableComms", "godot": "enable_comms", "convert": "identity" }
+      ],
+      "godotOnly": ["light_value", "tag_group_name", "tag_name"],
+      "webOnly": [],
+      "notes": ["lights[] <-> Godot _data.segment_datas[] (segment_color/active) + the `segments` count + `light_value` bitmask. Per-tier `tag` is preserved web-side but has no Godot home (one BYTE tag per tower), so it drops on web->native."]
+    },
+    "six_axis_robot": {
+      "status": "mapped",
+      "godotScene": "res://parts/SixAxisRobot.tscn",
+      "godotScript": "res://src/SixAxisRobot/six_axis_robot.gd",
+      "params": [
+        { "web": "j1", "godot": "j1_angle", "convert": "identity" },
+        { "web": "j2", "godot": "j2_angle", "convert": "identity" },
+        { "web": "j3", "godot": "j3_angle", "convert": "identity" },
+        { "web": "j4", "godot": "j4_angle", "convert": "identity" },
+        { "web": "j5", "godot": "j5_angle", "convert": "identity" },
+        { "web": "j6", "godot": "j6_angle", "convert": "identity" },
+        { "web": "motionSpeed", "godot": "motion_speed", "convert": "identity" },
+        { "web": "robotScale", "godot": "robot_scale", "convert": "identity" },
+        { "web": "vacuumOn", "godot": "vacuum_on", "convert": "identity" },
+        { "web": "enableComms", "godot": "enable_comms", "convert": "identity" },
+        { "web": "commandTag", "godot": "command_tag", "convert": "identity" },
+        { "web": "executeTag", "godot": "execute_tag", "convert": "identity" },
+        { "web": "doneTag", "godot": "done_tag", "convert": "identity" },
+        { "web": "gripperTag", "godot": "vacuum_tag", "convert": "identity" },
+        { "web": "waypoints", "godot": "waypoints", "convert": "waypoints" }
+      ],
+      "godotOnly": ["holding_object", "show_gizmos", "tag_group_name", "tag_groups"],
+      "webOnly": [],
+      "notes": ["waypoints (WaypointStore) <-> Godot home_position + waypoints Dict (index-keyed Array[float] of 6 joint angles) + selected_waypoint + new_waypoint_name, via the waypoints convert in scene_io.gd."]
+    },
+    "agv": {
+      "status": "mapped",
+      "godotScene": "res://parts/AGV.tscn",
+      "godotScript": "res://src/AGV/agv.gd",
+      "params": [
+        { "web": "forksRaised", "godot": "forks_raised", "convert": "identity" },
+        { "web": "liftHeight", "godot": "lift_height", "convert": "identity" },
+        { "web": "maxLiftHeight", "godot": "max_lift_height", "convert": "identity" },
+        { "web": "driveSpeed", "godot": "drive_speed", "convert": "identity" },
+        { "web": "turnSpeed", "godot": "turn_speed", "convert": "identity" },
+        { "web": "liftSpeed", "godot": "lift_speed", "convert": "identity" },
+        { "web": "enableComms", "godot": "enable_comms", "convert": "identity" },
+        { "web": "commandTag", "godot": "command_tag", "convert": "identity" },
+        { "web": "executeTag", "godot": "execute_tag", "convert": "identity" },
+        { "web": "doneTag", "godot": "done_tag", "convert": "identity" },
+        { "web": "gripperTag", "godot": "lift_tag", "convert": "identity" },
+        { "web": "waypoints", "godot": "waypoints", "convert": "waypoints" }
+      ],
+      "godotOnly": ["holding_object", "show_gizmos", "tag_group_name", "tag_groups"],
+      "webOnly": [],
+      "notes": ["waypoints <-> Godot home_position(Vector3)+home_yaw_deg + waypoints Dict of AGVWaypoint(position+yaw_deg) + selected/new, via the waypoints convert. Web pose [x,z,yawDeg] <-> position (x,0,z)+yaw_deg. AGV's gripperTag maps to lift_tag (fork lift), not a vacuum."]
+    },
+    "gantry": {
+      "status": "mapped",
+      "godotScene": "res://parts/Gantry.tscn",
+      "godotScript": "res://src/Gantry/gantry.gd",
+      "params": [
+        { "web": "vacuumOn", "godot": "vacuum_on", "convert": "identity" },
+        { "web": "frameLength", "godot": "frame_length", "convert": "identity" },
+        { "web": "frameWidth", "godot": "frame_width", "convert": "identity" },
+        { "web": "frameHeight", "godot": "frame_height", "convert": "identity" },
+        { "web": "xPosition", "godot": "x_position", "convert": "identity" },
+        { "web": "yPosition", "godot": "y_position", "convert": "identity" },
+        { "web": "zPosition", "godot": "z_position", "convert": "identity" },
+        { "web": "motionSpeed", "godot": "motion_speed", "convert": "identity" },
+        { "web": "enableComms", "godot": "enable_comms", "convert": "identity" },
+        { "web": "commandTag", "godot": "command_tag", "convert": "identity" },
+        { "web": "executeTag", "godot": "execute_tag", "convert": "identity" },
+        { "web": "doneTag", "godot": "done_tag", "convert": "identity" },
+        { "web": "gripperTag", "godot": "vacuum_tag", "convert": "identity" },
+        { "web": "waypoints", "godot": "waypoints", "convert": "waypoints" }
+      ],
+      "godotOnly": ["beam_front_offset", "beam_back_offset", "x_carriage_offset", "beam_secondary_offset", "secondary_followers_offset", "y_carriage_offset", "z_actuator_offset", "leg_top_offset", "leg_bottom_offset", "beam_maincarriage_01_offset", "beam_maincarriage_02_offset", "beam_lift_offset", "tool_offset", "vacuum_area_offset", "holding_object", "show_gizmos", "tag_group_name", "tag_groups"],
+      "webOnly": [],
+      "notes": ["waypoints <-> Godot home_position + waypoints Dict (index-keyed Array[float] [x,y,z]) + selected/new, via the waypoints convert."]
+    },
+    "building": {
+      "status": "mapped",
+      "godotScene": "res://parts/Building.tscn",
+      "godotScript": "res://parts/building.gd",
+      "params": [
+        { "web": "lengthSections", "godot": "width_sections", "convert": "identity" },
+        { "web": "widthSections", "godot": "length_sections", "convert": "identity" },
+        { "web": "heightSections", "godot": "height_sections", "convert": "identity" },
+        { "web": "rules", "godot": "rules", "convert": "wallRules" },
+        { "web": "floorVisible", "godot": "floor_visible", "convert": "identity" },
+        { "web": "wallsVisible", "godot": "walls_visible", "convert": "identity" },
+        { "web": "roofVisible", "godot": "roof_visible", "convert": "identity" },
+        { "web": "brightness", "godot": "brightness", "convert": "identity" },
+        { "web": "backgroundColor", "godot": "background_color", "convert": "color" },
+        { "web": "shadowQuality", "godot": "shadow_quality", "convert": "enumMap", "enumMap": { "low": 0, "medium": 1, "high": 2, "veryHigh": 3 } }
+      ],
+      "godotOnly": ["default_wall"],
+      "webOnly": [],
+      "notes": ["Procedural shell maps (sections/visibility/lighting). AXIS CROSS-MAP: web and Godot use opposite length/width conventions — web lengthSections is the X extent, Godot width_sections is the X extent (web building.ts vs Godot building.gd _get_wall_bounds). So lengthSections<->width_sections and widthSections<->length_sections, NOT by matching name, or the warehouse ports rotated 90 deg and wall-rule perimeter indices misalign.", "`rules` <-> Array[BuildingWallRule] via the wallRules converter (wall enum A=0..DOCK_DOOR=4; web doorCount<->door_count; Godot opening_width/opening_height keep defaults)."]
+    }
+  },
+  "auditPending": [],
+  "knownHardCases": {
+    "building dock-door detail": "The shell + wall rules round-trip, but Godot's per-rule opening_width/opening_height and the live dock-door open-states (openDoors) aren't carried; dock_door rules use Godot's default opening dims.",
+    "stack_light per-tier tags": "Web models a PLC tag per tier; Godot has one BYTE tag per tower (a bit per tier). Per-tier tags are preserved web-side but dropped on web->native; resolved at the comms-binding layer (compose the byte from the per-tier ST tags) when ws_plc lands.",
+    "stProgram": "Web bundles ST source + runs it in-engine; Godot has no ST runtime. Carried as scene metadata (Phase 4a); native execution = WsPlcLink (Phase 4b) + the Godot ws_plc transport."
+  }
+}

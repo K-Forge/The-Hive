@@ -1,0 +1,82 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[addons]
+
+scene_library/cache/path="res://addons/scene-library/thumb_cache/"
+
+[application]
+
+config/name="Open Industry Project"
+config/features=PackedStringArray("4.7", "Forward Plus")
+boot_splash/stretch_mode=0
+boot_splash/image="res://assets/png/splash.png"
+run/scene_time_scale=1.0
+
+[autoload]
+
+ConveyorSnapping="*res://addons/oip_ui/Autoload/ConveyorSnapping.gd"
+StructureSnapping="*res://addons/oip_ui/Autoload/StructureSnapping.gd"
+OIPCommsService="*res://src/comms/oip_comms_service.gd"
+SoftPlcBridge="*res://src/comms/soft_plc_bridge.gd"
+
+[debug]
+
+gdscript/warnings/shadowed_variable=2
+gdscript/warnings/shadowed_variable_base_class=2
+gdscript/warnings/unreachable_code=2
+gdscript/warnings/unreachable_pattern=2
+gdscript/warnings/incompatible_ternary=2
+gdscript/warnings/untyped_declaration=2
+gdscript/warnings/unsafe_property_access=1
+gdscript/warnings/unsafe_method_access=1
+gdscript/warnings/unsafe_cast=1
+gdscript/warnings/unsafe_call_argument=1
+gdscript/warnings/missing_tool=2
+gdscript/warnings/redundant_await=2
+gdscript/warnings/assert_always_true=2
+gdscript/warnings/assert_always_false=2
+gdscript/warnings/integer_division=2
+gdscript/warnings/narrowing_conversion=2
+gdscript/warnings/int_as_enum_without_cast=2
+gdscript/warnings/int_as_enum_without_match=2
+
+[editor]
+
+naming/default_signal_callback_name="_on_{NodeName}_{signal_name}"
+naming/scene_name_casing=1
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/agv_gizmo/plugin.cfg", "res://addons/conveyor_gizmo/plugin.cfg", "res://addons/dock_door_tool/plugin.cfg", "res://addons/editor-pilot-mode/plugin.cfg", "res://addons/gantry_gizmo/plugin.cfg", "res://addons/oip_comms/plugin.cfg", "res://addons/oip_ui/plugin.cfg", "res://addons/opc_ua_browser/plugin.cfg", "res://addons/robot_gizmo/plugin.cfg", "res://addons/scene-library/plugin.cfg", "res://addons/scene_interop/plugin.cfg", "res://addons/st_editor/plugin.cfg", "res://addons/tag_groups/plugin.cfg")
+
+[filesystem]
+
+import/blender/enabled=false
+import/fbx/enabled=false
+
+[layer_names]
+
+3d_physics/layer_1="Static"
+3d_physics/layer_2="Dynamic"
+3d_physics/layer_3="Belt"
+3d_physics/layer_4="Box"
+3d_physics/layer_5="SimpleConveyorShape"
+
+[physics]
+
+3d/run_on_separate_thread=true
+common/physics_ticks_per_second=120
+3d/physics_engine="Jolt Physics"
+jolt_physics_3d/simulation/velocity_steps=15
+jolt_physics_3d/simulation/position_steps=20
+jolt_physics_3d/simulation/penetration_slop=0.002
+jolt_physics_3d/simulation/speculative_contact_distance=0.02
+jolt_physics_3d/collisions/collision_margin_fraction=0.0

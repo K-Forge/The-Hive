@@ -1,0 +1,6 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://dtq1uyq1dcxwr"]
+
+[resource]
+resource_name = "PlasticControl"
+albedo_color = Color(0.0509784, 0.729397, 0.819582, 1)
+roughness = 0.5

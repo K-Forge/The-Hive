@@ -1,0 +1,65 @@
+[gd_resource type="VisualShader" format=3 uid="uid://b6uso6bqiurpv"]
+
+[ext_resource type="Texture2D" uid="uid://bfoh4u2xut8f3" path="res://assets/3DModels/Textures/LegsBar_GrayMetal.png" id="1_hiafm"]
+
+[sub_resource type="VisualShaderNodeVectorCompose" id="VisualShaderNodeVectorCompose_06lb5"]
+default_input_values = [0, 1.0, 1, 1.0, 2, 0.0]
+op_type = 0
+
+[sub_resource type="VisualShaderNodeUVFunc" id="VisualShaderNodeUVFunc_f6exu"]
+function = 1
+
+[sub_resource type="VisualShaderNodeFloatFunc" id="VisualShaderNodeFloatFunc_rpvl7"]
+function = 15
+
+[sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_7i0qs"]
+parameter_name = "Scale"
+
+[sub_resource type="VisualShaderNodeColorParameter" id="VisualShaderNodeColorParameter_j67t0"]
+parameter_name = "Color"
+
+[sub_resource type="VisualShaderNodeColorOp" id="VisualShaderNodeColorOp_d0s8w"]
+operator = 4
+
+[sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_d1u8v"]
+parameter_name = "Metallic"
+default_value_enabled = true
+default_value = 0.94
+
+[sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_xqcit"]
+parameter_name = "Roughness"
+default_value_enabled = true
+default_value = 0.5
+
+[sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_u4ewe"]
+parameter_name = "Specular"
+default_value_enabled = true
+default_value = 0.5
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_ycidp"]
+texture = ExtResource("1_hiafm")
+texture_type = 1
+
+[resource]
+nodes/fragment/0/position = Vector2(1020, 180)
+nodes/fragment/5/node = SubResource("VisualShaderNodeTexture_ycidp")
+nodes/fragment/5/position = Vector2(140, 60)
+nodes/fragment/11/node = SubResource("VisualShaderNodeVectorCompose_06lb5")
+nodes/fragment/11/position = Vector2(-460, 260)
+nodes/fragment/13/node = SubResource("VisualShaderNodeUVFunc_f6exu")
+nodes/fragment/13/position = Vector2(-160, 160)
+nodes/fragment/14/node = SubResource("VisualShaderNodeFloatFunc_rpvl7")
+nodes/fragment/14/position = Vector2(-760, 340)
+nodes/fragment/19/node = SubResource("VisualShaderNodeFloatParameter_7i0qs")
+nodes/fragment/19/position = Vector2(-1160, 320)
+nodes/fragment/20/node = SubResource("VisualShaderNodeColorParameter_j67t0")
+nodes/fragment/20/position = Vector2(60, 340)
+nodes/fragment/21/node = SubResource("VisualShaderNodeColorOp_d0s8w")
+nodes/fragment/21/position = Vector2(420, 240)
+nodes/fragment/22/node = SubResource("VisualShaderNodeFloatParameter_d1u8v")
+nodes/fragment/22/position = Vector2(400, 380)
+nodes/fragment/23/node = SubResource("VisualShaderNodeFloatParameter_xqcit")
+nodes/fragment/23/position = Vector2(400, 600)
+nodes/fragment/24/node = SubResource("VisualShaderNodeFloatParameter_u4ewe")
+nodes/fragment/24/position = Vector2(400, 820)
+nodes/fragment/connections = PackedInt32Array(11, 0, 13, 1, 13, 0, 5, 0, 19, 0, 14, 0, 20, 0, 21, 1, 5, 0, 21, 0, 21, 0, 0, 0, 22, 0, 0, 2, 23, 0, 0, 3, 14, 0, 11, 1, 24, 0, 0, 4)

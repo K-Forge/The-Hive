@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://2gb3wh64akvs"]
+
+[ext_resource type="Script" path="res://src/ConveyorLeg/straight_leg.gd" id="1_strleg"]
+
+[node name="StraightLeg" type="Node3D"]
+script = ExtResource("1_strleg")
+
+[node name="Inner" type="Node3D" parent="."]
+
+[node name="Structure" type="MeshInstance3D" parent="Inner"]

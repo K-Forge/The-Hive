@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://dxgafyrl0mncb"]
+
+[ext_resource type="PackedScene" uid="uid://c3pyj0o17nagr" path="res://assets/3DModels/WallsAndRoof/Wall_A.glb" id="1_kcy3m"]
+
+[node name="Wall_A" unique_id=1086820686 instance=ExtResource("1_kcy3m")]

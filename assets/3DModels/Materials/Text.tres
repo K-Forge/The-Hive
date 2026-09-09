@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://ddf4elviahmx8"]
+
+[ext_resource type="Texture2D" uid="uid://dbvo3wfxqenus" path="res://assets/3DModels/Textures/Diverter_Warning.png" id="1_3iwrc"]
+
+[resource]
+resource_name = "Text"
+albedo_texture = ExtResource("1_3iwrc")
+roughness = 0.5

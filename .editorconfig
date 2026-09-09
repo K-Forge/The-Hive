@@ -1,0 +1,15 @@
+﻿# Top-most EditorConfig file
+root = true
+
+[*]
+# Whitespace
+indent_style = tab
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+[*.cs]
+# CA1050: Declare types in namespaces
+dotnet_diagnostic.CA1050.severity = none
+
+[*.csproj]
+indent_style = space

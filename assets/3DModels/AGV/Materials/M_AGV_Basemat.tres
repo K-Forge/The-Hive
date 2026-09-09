@@ -1,0 +1,23 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://cq8fobt5pvbxy"]
+
+[ext_resource type="Texture2D" uid="uid://geoamp0hb164" path="res://assets/3DModels/AGV/AGV_BaseColor.png" id="1_o0cue"]
+[ext_resource type="Texture2D" uid="uid://bgr2ugrmo4fw" path="res://assets/3DModels/AGV/AGV_ORM.png" id="2_t1pdd"]
+[ext_resource type="Texture2D" uid="uid://blmneouu8bqyv" path="res://assets/3DModels/AGV/AGV_Normal.png" id="3_rv5g6"]
+
+[resource]
+resource_name = "M_AGV_Basemat"
+cull_mode = 2
+albedo_texture = ExtResource("1_o0cue")
+metallic = 1.0
+metallic_texture = ExtResource("2_t1pdd")
+metallic_texture_channel = 2
+roughness_texture = ExtResource("2_t1pdd")
+roughness_texture_channel = 1
+normal_enabled = true
+normal_texture = ExtResource("3_rv5g6")
+rim_enabled = true
+rim_tint = 0.75
+ao_enabled = true
+ao_light_affect = 1.0
+ao_texture = ExtResource("2_t1pdd")
+metadata/_gltf_primary_texture_coord = 0
