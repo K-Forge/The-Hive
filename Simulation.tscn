@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://du8q31sbxhd14"]
 
-[ext_resource type="PackedScene" uid="uid://c5bcg4gqugxqe" path="res://the_hive/model.fbx" id="1_2iqi2"]
+[ext_resource type="PackedScene" uid="uid://du8q31sbxhd14" path="res://Simulation.tscn" id="1_2iqi2"]
 
-[node name="Simulation" type="Node3D" unique_id=1983363257]
+[node name="Simulation" unique_id=1983363257 instance=ExtResource("1_2iqi2")]
 
-[node name="model" parent="." unique_id=487151323 instance=ExtResource("1_2iqi2")]
+[node name="model" parent="." index="0" unique_id=487151323]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 267.29388, 25.777023, -162.0697)
