@@ -1,0 +1,15 @@
+[gd_resource type="ORMMaterial3D" format=3 uid="uid://dvwsgs8ig73e4"]
+
+[ext_resource type="Texture2D" uid="uid://cerxygas31mit" path="res://assets/3DModels/DockDoor/Textures/AutoLeveler_BaseColor.png" id="1_6fccq"]
+[ext_resource type="Texture2D" uid="uid://cm1xdqwk5by0f" path="res://assets/3DModels/DockDoor/Textures/AutoLeveler_Normal.png" id="2_jlomi"]
+[ext_resource type="Texture2D" uid="uid://c75qxp2q5y18h" path="res://assets/3DModels/DockDoor/Textures/AutoLeveler_ORM.png" id="3_6o5du"]
+
+[resource]
+albedo_texture = ExtResource("1_6fccq")
+orm_texture = ExtResource("3_6o5du")
+normal_enabled = true
+normal_texture = ExtResource("2_jlomi")
+rim_enabled = true
+rim = 0.8
+rim_tint = 0.75
+ao_enabled = true

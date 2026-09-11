@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://c2qoafuw6id5v"]
+
+[ext_resource type="Script" uid="uid://bly2r1sqb01u5" path="res://parts/generic_data.gd" id="1_18pcd"]
+
+[node name="GenericData" type="Node" unique_id=462826667]
+script = ExtResource("1_18pcd")
+tag_value = false
+setup = true

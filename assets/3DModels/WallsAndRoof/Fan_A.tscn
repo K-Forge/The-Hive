@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://cp3m4hftvg6f5"]
+
+[ext_resource type="PackedScene" uid="uid://d2ieuhuq71vf2" path="res://assets/3DModels/WallsAndRoof/Fan_A.glb" id="1_xpkl7"]
+[ext_resource type="Material" uid="uid://cncicrnffmigw" path="res://assets/3DModels/WallsAndRoof/Materials/Building_Fan_A.tres" id="2_uujii"]
+
+[node name="Fan_A" unique_id=846313169 instance=ExtResource("1_xpkl7")]
+
+[node name="Fan_01" parent="." index="0" unique_id=313915025]
+surface_material_override/0 = ExtResource("2_uujii")

@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://du8q31sbxhd14"]
+
+[ext_resource type="PackedScene" uid="uid://bw5bcpkthpqvg" path="res://the_hive/models/gltf/model.gltf" id="1_t6gs0"]
+[ext_resource type="PackedScene" uid="uid://cwtvltmip6fs2" path="res://the_hive/models/glb/model.glb" id="2_lfd1m"]
+[ext_resource type="PackedScene" uid="uid://c5bcg4gqugxqe" path="res://the_hive/models/fbx/model.fbx" id="3_uobxk"]
+
+[node name="Simulation" type="Node3D" unique_id=1105810463]
+
+[node name="the_hive_gltf" parent="." unique_id=668533679 instance=ExtResource("1_t6gs0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 545.80554, 0, 0)
+
+[node name="the_hive_glb" parent="." unique_id=985914126 instance=ExtResource("2_lfd1m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 365.06998, 0, 0)
+
+[node name="the_hive_fbx" parent="." unique_id=1554614972 instance=ExtResource("3_uobxk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 179.06485, 0, 0)

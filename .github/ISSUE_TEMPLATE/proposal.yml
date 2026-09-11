@@ -1,0 +1,25 @@
+name: Proposal
+description: Propose a new feature or improvement for Open Industry Project
+title: "[Proposal]: "
+labels: ["proposal"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Search [existing proposals](https://github.com/Open-Industry-Project/Open-Industry-Project/issues?q=is%3Aissue+label%3Aproposal) for duplicates before submitting.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or limitation
+      description: Describe the problem you are facing. Focus on the problem, not the solution.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed_improvement
+    attributes:
+      label: Proposed improvement
+      description: Describe your solution. Be specific enough that it could be implemented without guessing the details.
+    validations:
+      required: true

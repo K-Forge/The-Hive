@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://bvgmh86mxrx0d"]
+
+[ext_resource type="PackedScene" uid="uid://cst84jtmpoqsy" path="res://assets/3DModels/WallsAndRoof/Floor.glb" id="1_ub4yv"]
+
+[node name="Floor" unique_id=1483995879 instance=ExtResource("1_ub4yv")]

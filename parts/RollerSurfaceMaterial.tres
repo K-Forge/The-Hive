@@ -1,0 +1,6 @@
+[gd_resource type="PhysicsMaterial" format=3 uid="uid://c4d5e6f7g8iai"]
+
+[resource]
+resource_name = "RollerSurfaceMaterial"
+friction = 0.8
+rough = true

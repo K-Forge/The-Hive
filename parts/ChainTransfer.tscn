@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://cqufgm7ocho1i"]
+
+[ext_resource type="Script" uid="uid://durpw164djiny" path="res://src/ChainTransfer/chain_transfer.gd" id="1_dolaf"]
+[ext_resource type="PackedScene" uid="uid://ctc4i4ft2nrh2" path="res://src/ChainTransfer/Base.tscn" id="2_ftoaw"]
+[ext_resource type="Script" uid="uid://cccc713tuifj" path="res://src/ChainTransfer/base.gd" id="3_dolaf"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_og5kt"]
+resource_local_to_scene = true
+size = Vector3(1.404, 0.2, 2.4347825)
+
+[node name="ChainTransfer" type="Node3D" unique_id=1063223612]
+process_mode = 3
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.575, 0, 0, 0)
+script = ExtResource("1_dolaf")
+metadata/_snap_transform = Callable()
+
+[node name="ChainBases" type="Node3D" parent="." unique_id=2005978236]
+
+[node name="Base" parent="ChainBases" unique_id=1350737450 instance=ExtResource("2_ftoaw")]
+transform = Transform3D(0, 0, 0.4597701, 0, 1, 0, -1, 0, 0, 0, 0, 0)
+
+[node name="Base2" parent="ChainBases" unique_id=1270443092 instance=ExtResource("2_ftoaw")]
+transform = Transform3D(0, 0, 0.4597701, 0, 1, 0, -1, 0, 0, 0.33, 0, 0)
+
+[node name="ChainTransferBase" parent="ChainBases" unique_id=874599072 instance=ExtResource("2_ftoaw")]
+transform = Transform3D(0, 0, 0.4597701, 0, 1, 0, -1, 0, 0, 0.66, 0, 0)
+
+[node name="ChainTransferBase2" type="Node3D" parent="ChainBases" unique_id=1668600986 instance=ExtResource("2_ftoaw")]
+transform = Transform3D(0, 0, 0.4597701, 0, 1, 0, -1, 0, 0, 0.99, 0, 0)
+script = ExtResource("3_dolaf")
+
+[node name="ChainTransferBase3" type="Node3D" parent="ChainBases" unique_id=486246655 instance=ExtResource("2_ftoaw")]
+transform = Transform3D(0, 0, 0.4597701, 0, 1, 0, -1, 0, 0, 1.32, 0, 0)
+script = ExtResource("3_dolaf")
+
+[node name="SimpleConveyorShape" type="StaticBody3D" parent="." unique_id=134051690]
+collision_layer = 18
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SimpleConveyorShape" unique_id=884805445]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.66, -0.094, 0)
+shape = SubResource("BoxShape3D_og5kt")

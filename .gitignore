@@ -1,0 +1,22 @@
+.godot/
+
+# Godot-specific ignores
+.import/
+export.cfg
+export_credentials.cfg
+
+# Imported translations (automatically generated from CSV files)
+*.translation
+
+#Addons
+addons/oip_comms/bin/windows/~libOIP-COMMS.windows.*
+addons/zylann.editor_debugger
+
+oip_data/
+
+#Other
+.vs/
+
+# Archivos específicos de sistemas operativos
+.DS_Store
+Thumbs.db

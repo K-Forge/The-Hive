@@ -1,0 +1,15 @@
+[gd_resource type="ORMMaterial3D" format=3 uid="uid://djnqm3dsj7cjc"]
+
+[ext_resource type="Texture2D" uid="uid://diuyfq4w7n58i" path="res://assets/3DModels/Gantry/Textures/Gantry_01_Standard_BaseColor.png" id="1_f8vxg"]
+[ext_resource type="Texture2D" uid="uid://d4kqi5p8n0o42" path="res://assets/3DModels/Gantry/Textures/Gantry_01_Standard_Normal.png" id="2_f8vxg"]
+[ext_resource type="Texture2D" uid="uid://bomqfxrn8gau3" path="res://assets/3DModels/Gantry/Textures/Gantry_01_Standard_ORM.png" id="3_x1lfy"]
+
+[resource]
+albedo_texture = ExtResource("1_f8vxg")
+orm_texture = ExtResource("3_x1lfy")
+normal_enabled = true
+normal_texture = ExtResource("2_f8vxg")
+rim_enabled = true
+rim = 0.8
+rim_tint = 0.75
+ao_enabled = true

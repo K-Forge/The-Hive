@@ -1,0 +1,200 @@
+[gd_scene format=3 uid="uid://dyhvoundu2kqc"]
+
+[ext_resource type="Script" uid="uid://b0216dkga4vul" path="res://parts/building.gd" id="1_5rwsc"]
+[ext_resource type="MeshLibrary" uid="uid://cwdqkx8ftt4xp" path="res://assets/MeshLibs/Floor_Library.meshlib" id="2_iohv4"]
+[ext_resource type="Script" uid="uid://1it35d0vq4ou" path="res://parts/building_wall_rule.gd" id="2_lkod8"]
+[ext_resource type="MeshLibrary" uid="uid://cla2sf14oaubw" path="res://assets/MeshLibs/Wall_Library.meshlib" id="3_3d0q8"]
+[ext_resource type="MeshLibrary" uid="uid://btk8jgts5fcrl" path="res://assets/MeshLibs/Roof_Library.meshlib" id="4_5rwsc"]
+
+[sub_resource type="Resource" id="Resource_4bf66"]
+script = ExtResource("2_lkod8")
+count = 2
+start = 1
+metadata/_custom_type_script = "uid://1it35d0vq4ou"
+
+[sub_resource type="Resource" id="Resource_ymq1x"]
+script = ExtResource("2_lkod8")
+count = 2
+start = 24
+metadata/_custom_type_script = "uid://1it35d0vq4ou"
+
+[sub_resource type="Resource" id="Resource_2wb5a"]
+script = ExtResource("2_lkod8")
+wall = 0
+gap = 2
+count = 2
+start = 32
+metadata/_custom_type_script = "uid://1it35d0vq4ou"
+
+[sub_resource type="Resource" id="Resource_522rc"]
+script = ExtResource("2_lkod8")
+wall = 0
+gap = 2
+count = 2
+start = 28
+metadata/_custom_type_script = "uid://1it35d0vq4ou"
+
+[sub_resource type="Resource" id="Resource_wqnqx"]
+script = ExtResource("2_lkod8")
+wall = 4
+count = 1
+start = 2
+door_count = 2
+metadata/_custom_type_script = "uid://1it35d0vq4ou"
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sky"]
+
+[sub_resource type="Sky" id="Sky_sky"]
+sky_material = SubResource("ProceduralSkyMaterial_sky")
+
+[sub_resource type="Environment" id="Environment_ijpc5"]
+background_mode = 2
+sky = SubResource("Sky_sky")
+ambient_light_source = 2
+ambient_light_color = Color(0.72, 0.75, 0.8, 1)
+ambient_light_energy = 0.6
+tonemap_mode = 4
+tonemap_exposure = 1.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rm06n"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0)
+
+[sub_resource type="BoxMesh" id="BoxMesh_bv1le"]
+material = SubResource("StandardMaterial3D_rm06n")
+
+[node name="Building" type="Node3D" unique_id=183560046]
+script = ExtResource("1_5rwsc")
+width_sections = 5
+length_sections = 4
+default_wall = 3
+rules = Array[ExtResource("2_lkod8")]([SubResource("Resource_4bf66"), SubResource("Resource_ymq1x"), SubResource("Resource_2wb5a"), SubResource("Resource_522rc"), SubResource("Resource_wqnqx")])
+shadow_quality = 2
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2028685564]
+environment = SubResource("Environment_ijpc5")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1612400929]
+transform = Transform3D(0.70710677, 0.57921094, -0.40560412, 0, 0.57361084, 0.819128, 0.70710677, -0.57921094, 0.40560412, 0, 0, 0)
+light_energy = 0.7
+light_volumetric_fog_energy = 0.0
+light_specular = 0.2
+light_cull_mask = 4294967289
+shadow_enabled = true
+shadow_opacity = 0.6
+shadow_blur = 0.5
+shadow_caster_mask = 4294967289
+directional_shadow_max_distance = 66.51315
+sky_mode = 1
+
+[node name="DirectionalFill" type="DirectionalLight3D" parent="." unique_id=1612400930]
+transform = Transform3D(-0.7071, -0.5, 0.5, 0, 0.7071, 0.7071, -0.7071, 0.5, -0.5, 0, 0, 0)
+light_energy = 0.5
+light_volumetric_fog_energy = 0.0
+light_specular = 0.2
+light_cull_mask = 4294967289
+directional_shadow_max_distance = 66.51315
+sky_mode = 1
+
+[node name="DirectionalWallA" type="DirectionalLight3D" parent="." unique_id=1612400931]
+transform = Transform3D(0.70710677, 0.57921094, -0.40560412, 0, 0.57361084, 0.819128, 0.70710677, -0.57921094, 0.40560412, 0, 0, 0)
+light_energy = 0.5
+light_volumetric_fog_energy = 0.0
+light_specular = 0.2
+light_cull_mask = 2
+shadow_enabled = true
+shadow_opacity = 0.6
+shadow_blur = 0.5
+shadow_caster_mask = 2
+directional_shadow_mode = 0
+directional_shadow_max_distance = 66.51315
+sky_mode = 1
+
+[node name="DirectionalWallB" type="DirectionalLight3D" parent="." unique_id=1612400932]
+transform = Transform3D(-0.7071, -0.5, 0.5, 0, 0.7071, 0.7071, -0.7071, 0.5, -0.5, 0, 0, 0)
+light_energy = 0.5
+light_volumetric_fog_energy = 0.0
+light_specular = 0.2
+light_cull_mask = 4
+shadow_enabled = true
+shadow_opacity = 0.6
+shadow_blur = 0.5
+shadow_caster_mask = 4
+directional_shadow_mode = 0
+directional_shadow_max_distance = 66.51315
+sky_mode = 1
+
+[node name="DirectionalWallAFill" type="DirectionalLight3D" parent="." unique_id=1612400933]
+transform = Transform3D(-0.7071, -0.5, 0.5, 0, 0.7071, 0.7071, -0.7071, 0.5, -0.5, 0, 0, 0)
+light_energy = 0.3
+light_volumetric_fog_energy = 0.0
+light_specular = 0.2
+light_cull_mask = 2
+directional_shadow_max_distance = 66.51315
+sky_mode = 1
+
+[node name="DirectionalWallBFill" type="DirectionalLight3D" parent="." unique_id=1612400934]
+transform = Transform3D(0.70710677, 0.57921094, -0.40560412, 0, 0.57361084, 0.819128, 0.70710677, -0.57921094, 0.40560412, 0, 0, 0)
+light_energy = 0.3
+light_volumetric_fog_energy = 0.0
+light_specular = 0.2
+light_cull_mask = 4
+directional_shadow_max_distance = 66.51315
+sky_mode = 1
+
+[node name="Floor" type="GridMap" parent="." unique_id=1032330647]
+mesh_library = ExtResource("2_iohv4")
+cell_size = Vector3(10, 10, 10)
+cell_center_x = false
+cell_center_y = false
+cell_center_z = false
+collision_mask = 8
+data = {
+"cells": PackedInt32Array(65534, 65534, 0, 65534, 65535, 0, 65534, 0, 0, 65534, 1, 0, 65535, 65534, 0, 65535, 65535, 0, 65535, 0, 0, 65535, 1, 0, 0, 65534, 0, 0, 65535, 0, 0, 0, 0, 0, 1, 0, 1, 65534, 0, 1, 65535, 0, 1, 0, 0, 1, 1, 0, 2, 65534, 0, 2, 65535, 0, 2, 0, 0, 2, 1, 0)
+}
+metadata/_editor_floor_ = Vector3(0, -1, 0)
+
+[node name="WallsA" type="GridMap" parent="." unique_id=1289864612]
+mesh_library = ExtResource("3_3d0q8")
+cell_size = Vector3(10, 6, 10)
+cell_octant_size = 6
+cell_center_x = false
+cell_center_y = false
+cell_center_z = false
+render_layers = 2
+data = {
+"cells": PackedInt32Array(65534, 65534, 3, 65535, 65534, 1, 0, 65534, 3, 1, 65534, 1, 2, 65534, 3, 3, 65534, 1441792, 3, 65535, 1441795, 3, 0, 1441795, 3, 1, 1441792, 196606, 65534, 2, 196607, 65534, 2, 131072, 65534, 2, 131073, 65534, 2, 131074, 65534, 2, 131075, 65534, 1441794, 131075, 65535, 1441794, 131075, 0, 1441794, 131075, 1, 1441794, 196611, 65534, 1441794, 196611, 65535, 1441794, 196611, 0, 1441794, 196611, 1, 1441794)
+}
+metadata/_editor_floor_ = Vector3(0, 0, 0)
+
+[node name="WallsB" type="GridMap" parent="." unique_id=1289864613]
+mesh_library = ExtResource("3_3d0q8")
+cell_size = Vector3(10, 6, 10)
+cell_octant_size = 6
+cell_center_x = false
+cell_center_y = false
+cell_center_z = false
+render_layers = 4
+data = {
+"cells": PackedInt32Array(65535, 2, 655363, 0, 2, 655361, 1, 2, 655363, 2, 2, 655361, 3, 2, 655363, 65534, 65535, 1048576, 65534, 0, 1048579, 65534, 1, 1048579, 65534, 2, 1048576, 196607, 2, 655362, 131072, 2, 655362, 131073, 2, 655362, 131074, 2, 655362, 131075, 2, 655362, 196606, 65535, 1048578, 196606, 0, 1048578, 196606, 1, 1048578, 196606, 2, 1048578, 262142, 65535, 1048578, 262142, 0, 1048578, 262142, 1, 1048578, 262142, 2, 1048578)
+}
+metadata/_editor_floor_ = Vector3(0, 0, 0)
+
+[node name="Roof" type="GridMap" parent="." unique_id=1331643088]
+mesh_library = ExtResource("4_5rwsc")
+cell_size = Vector3(10, 9, 10)
+cell_center_x = false
+cell_center_y = false
+cell_center_z = false
+data = {
+"cells": PackedInt32Array(196606, 65534, 0, 196607, 65534, 0, 131072, 65534, 0, 131073, 65534, 0, 131074, 65534, 0, 196607, 2, 655360, 131072, 2, 655360, 131073, 2, 655360, 131074, 2, 655360, 131075, 2, 655360, 196606, 65535, 1, 196606, 0, 1, 196607, 65535, 1, 196607, 0, 1, 131072, 65535, 1, 131072, 0, 1, 131073, 65535, 1, 131073, 0, 1, 131074, 65535, 1, 131074, 0, 1)
+}
+metadata/_editor_floor_ = Vector3(0, 2, 0)
+
+[node name="DockDoors" type="Node3D" parent="." unique_id=299569443]
+
+[node name="ThumbnailMesh" type="MeshInstance3D" parent="." unique_id=299569442]
+transform = Transform3D(50, 0, 0, 0, 50, 0, 0, 0, 50, 0, 0, 0)
+visible = false
+mesh = SubResource("BoxMesh_bv1le")
+metadata/_edit_lock_ = true

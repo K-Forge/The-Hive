@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://bre2hplg7f74j"]
+
+[ext_resource type="ArrayMesh" uid="uid://bogcpb3og1dfo" path="res://assets/3DModels/DockDoor/Meshes/DockDoor_Door_01.res" id="1_40e4v"]
+[ext_resource type="Material" uid="uid://xv78osseudt" path="res://assets/3DModels/DockDoor/Materials/DockDoor.tres" id="4_lujdd"]
+
+[node name="DockDoor_Wall_B" type="Node3D" unique_id=365884926]
+
+[node name="DockDoorDoor01" type="MeshInstance3D" parent="." unique_id=2058383398]
+mesh = ExtResource("1_40e4v")
+surface_material_override/0 = ExtResource("4_lujdd")

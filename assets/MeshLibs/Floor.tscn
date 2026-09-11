@@ -1,0 +1,56 @@
+[gd_scene format=3 uid="uid://cqywoaa7fg0x1"]
+
+[ext_resource type="Texture2D" uid="uid://b5wtrgidr8gps" path="res://assets/3DModels/Floor_granular_concrete_diff_8k.jpg" id="1_t3vrm"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1cjp3"]
+resource_name = "ConcreteTile_mat"
+cull_mode = 2
+albedo_texture = ExtResource("1_t3vrm")
+roughness = 0.5
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_bjb6s"]
+_surfaces = [{
+"aabb": AABB(-2, 0, -2, 4, 1e-05, 4),
+"format": 34896613377,
+"index_count": 6,
+"index_data": PackedByteArray(0, 0, 1, 0, 2, 0, 0, 0, 3, 0, 1, 0),
+"name": "ConcreteTile_mat",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray(0, 0, 0, 0, 255, 255, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 255, 255, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_ob42n"]
+resource_name = "Floor_Plane"
+_surfaces = [{
+"aabb": AABB(-2, 0, -2, 4, 1e-05, 4),
+"attribute_data": PackedByteArray(255, 127, 255, 255, 255, 95, 255, 255, 255, 255, 255, 127, 255, 255, 255, 95, 255, 255, 255, 255, 255, 255, 255, 255, 255, 127, 255, 127, 255, 95, 255, 95),
+"format": 34896613431,
+"index_count": 6,
+"index_data": PackedByteArray(0, 0, 1, 0, 2, 0, 0, 0, 3, 0, 1, 0),
+"material": SubResource("StandardMaterial3D_1cjp3"),
+"name": "ConcreteTile_mat",
+"primitive": 3,
+"uv_scale": Vector4(2, 2, 2.6666665, 2.6666665),
+"vertex_count": 4,
+"vertex_data": PackedByteArray(0, 0, 0, 0, 255, 255, 255, 191, 255, 255, 0, 0, 0, 0, 255, 191, 255, 255, 0, 0, 255, 255, 255, 191, 0, 0, 0, 0, 0, 0, 255, 191, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127)
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_bjb6s")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_aqyav"]
+size = Vector3(4, 0.01, 4)
+
+[node name="Floor" type="Node3D" unique_id=324701765]
+
+[node name="ConcreteTile" type="MeshInstance3D" parent="." unique_id=1221065170]
+mesh = SubResource("ArrayMesh_ob42n")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="ConcreteTile" unique_id=745332601]
+collision_mask = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ConcreteTile/StaticBody3D" unique_id=1734373501]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.005, 0)
+shape = SubResource("BoxShape3D_aqyav")

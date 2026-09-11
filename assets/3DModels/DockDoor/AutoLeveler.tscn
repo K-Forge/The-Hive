@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://bbdv4w2j88de3"]
+
+[ext_resource type="Script" uid="uid://u46qjxfpvbxk" path="res://src/AutoLeveler/Auto_Leveler.gd" id="1_hhlft"]
+[ext_resource type="Material" uid="uid://dvwsgs8ig73e4" path="res://assets/3DModels/DockDoor/Materials/AutoLeveler.tres" id="1_xk7yw"]
+[ext_resource type="ArrayMesh" uid="uid://cwl3esvsoipnm" path="res://assets/3DModels/DockDoor/Meshes/AutoLeveler_Lift_Lip.res" id="2_hhlft"]
+[ext_resource type="ArrayMesh" uid="uid://bkjv82harr0wc" path="res://assets/3DModels/DockDoor/Meshes/AutoLeveler_Lift_Main.res" id="3_rv1ls"]
+[ext_resource type="ArrayMesh" uid="uid://cvelt0ulslqtx" path="res://assets/3DModels/DockDoor/Meshes/AutoLeveler_Surrounds.res" id="4_s4py7"]
+[ext_resource type="ArrayMesh" uid="uid://bpo6vys33qmd" path="res://assets/3DModels/DockDoor/Meshes/Bollard.res" id="5_hoycc"]
+
+[node name="AutoLeveler" type="Node3D" unique_id=365884926]
+script = ExtResource("1_hhlft")
+lip_open_angle = -5.0
+
+[node name="AutoLeveler_Lift_Main" type="MeshInstance3D" parent="." unique_id=257697929]
+transform = Transform3D(1, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000001, 0, 0, 2.4)
+material_override = ExtResource("1_xk7yw")
+mesh = ExtResource("3_rv1ls")
+
+[node name="AutoLeveler_Lift_Lip" type="MeshInstance3D" parent="AutoLeveler_Lift_Main" unique_id=725815707]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, -0.024891688, -2.4125707)
+material_override = ExtResource("1_xk7yw")
+mesh = ExtResource("2_hhlft")
+
+[node name="AutoLevelerSurrounds" type="MeshInstance3D" parent="." unique_id=1974067404]
+material_override = ExtResource("1_xk7yw")
+mesh = ExtResource("4_s4py7")
+
+[node name="Bollard_R" type="MeshInstance3D" parent="." unique_id=518225277]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.75, 0, 0.25)
+material_override = ExtResource("1_xk7yw")
+mesh = ExtResource("5_hoycc")
+
+[node name="Bollard_L" type="MeshInstance3D" parent="." unique_id=1988655687]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.75, 0, 0.25)
+material_override = ExtResource("1_xk7yw")
+mesh = ExtResource("5_hoycc")

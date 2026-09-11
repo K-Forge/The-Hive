@@ -1,0 +1,149 @@
+[gd_scene format=3 uid="uid://b0wmg3bm6lht7"]
+
+[ext_resource type="Script" uid="uid://d362g8dqm3op5" path="res://addons/oip_comms/controls/tag_group.gd" id="1_ugh8j"]
+
+[node name="TagGroup" type="VBoxContainer"]
+size_flags_horizontal = 3
+script = ExtResource("1_ugh8j")
+
+[node name="Row1" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="Row1"]
+layout_mode = 2
+custom_minimum_size = Vector2(40, 0)
+text = "Name"
+
+[node name="Name" type="LineEdit" parent="Row1"]
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(80, 0)
+select_all_on_focus = true
+
+[node name="ProtocolLabel" type="Label" parent="Row1"]
+layout_mode = 2
+custom_minimum_size = Vector2(55, 0)
+text = "Protocol"
+
+[node name="Protocol" type="OptionButton" parent="Row1"]
+layout_mode = 2
+custom_minimum_size = Vector2(110, 0)
+selected = 0
+item_count = 8
+popup/item_0/text = "ab_eip"
+popup/item_0/id = 0
+popup/item_1/text = "modbus_tcp"
+popup/item_1/id = 1
+popup/item_2/text = "opc_ua"
+popup/item_2/id = 2
+popup/item_3/text = "siemens put/get"
+popup/item_3/id = 3
+popup/item_4/text = "ads"
+popup/item_4/id = 4
+popup/item_5/text = "rtde"
+popup/item_5/id = 5
+popup/item_6/text = "mqtt"
+popup/item_6/id = 6
+popup/item_7/text = "soft_plc (embedded ST)"
+popup/item_7/id = 7
+
+[node name="PollingRateLabel" type="Label" parent="Row1"]
+layout_mode = 2
+custom_minimum_size = Vector2(75, 0)
+text = "Polling (ms)"
+
+[node name="PollingRate" type="SpinBox" parent="Row1"]
+layout_mode = 2
+custom_minimum_size = Vector2(80, 0)
+max_value = 1000000.0
+value = 100.0
+rounded = true
+
+[node name="Delete" type="Button" parent="Row1"]
+layout_mode = 2
+text = "Delete"
+
+[node name="Row2" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="GatewayLabel" type="Label" parent="Row2"]
+layout_mode = 2
+custom_minimum_size = Vector2(55, 0)
+text = "Gateway"
+
+[node name="Gateway" type="LineEdit" parent="Row2"]
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(80, 0)
+select_all_on_focus = true
+
+[node name="PathLabel" type="Label" parent="Row2"]
+layout_mode = 2
+custom_minimum_size = Vector2(55, 0)
+text = "Path"
+
+[node name="Path" type="LineEdit" parent="Row2"]
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(60, 0)
+select_all_on_focus = true
+
+[node name="CPURow" type="HBoxContainer" parent="Row2"]
+layout_mode = 2
+
+[node name="CPULabel" type="Label" parent="Row2/CPURow"]
+layout_mode = 2
+custom_minimum_size = Vector2(30, 0)
+text = "CPU"
+
+[node name="CPU" type="OptionButton" parent="Row2/CPURow"]
+layout_mode = 2
+custom_minimum_size = Vector2(110, 0)
+selected = 0
+item_count = 7
+popup/item_0/text = "ControlLogix"
+popup/item_0/id = 0
+popup/item_1/text = "PLC5"
+popup/item_1/id = 1
+popup/item_2/text = "SLC500"
+popup/item_2/id = 2
+popup/item_3/text = "LogixPccc"
+popup/item_3/id = 3
+popup/item_4/text = "Micro800"
+popup/item_4/id = 4
+popup/item_5/text = "MicroLogix"
+popup/item_5/id = 5
+popup/item_6/text = "Omron"
+popup/item_6/id = 6
+
+[node name="PortRow" type="HBoxContainer" parent="Row2"]
+visible = false
+layout_mode = 2
+
+[node name="PortLabel" type="Label" parent="Row2/PortRow"]
+layout_mode = 2
+custom_minimum_size = Vector2(30, 0)
+text = "Port"
+
+[node name="Port" type="LineEdit" parent="Row2/PortRow"]
+layout_mode = 2
+custom_minimum_size = Vector2(60, 0)
+select_all_on_focus = true
+
+[node name="BrowseOpcUa" type="Button" parent="Row2"]
+layout_mode = 2
+text = "Browse"
+visible = false
+
+[node name="HSeparator" type="HSeparator" parent="."]
+layout_mode = 2
+
+[connection signal="text_changed" from="Row1/Name" to="." method="_on_text_changed"]
+[connection signal="item_selected" from="Row1/Protocol" to="." method="_on_item_selected"]
+[connection signal="value_changed" from="Row1/PollingRate" to="." method="_on_value_changed"]
+[connection signal="pressed" from="Row1/Delete" to="." method="_on_Delete_pressed"]
+[connection signal="text_changed" from="Row2/Gateway" to="." method="_on_Gateway_text_changed"]
+[connection signal="text_changed" from="Row2/Path" to="." method="_on_Path_text_changed"]
+[connection signal="item_selected" from="Row2/CPURow/CPU" to="." method="_on_item_selected"]
+[connection signal="text_changed" from="Row2/PortRow/Port" to="." method="_on_text_changed"]
+[connection signal="pressed" from="Row2/BrowseOpcUa" to="." method="_on_browse_opc_ua_pressed"]

@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://csjuri74chooy"]
+
+[ext_resource type="Texture2D" uid="uid://bl4ku85osaxkd" path="res://assets/3DModels/Textures/Diverter_Simple_Metal.png" id="1_eqj3y"]
+
+[resource]
+resource_name = "Metall2"
+albedo_texture = ExtResource("1_eqj3y")
+metallic = 0.905
+roughness = 0.35
+uv1_scale = Vector3(5, 1, 1)

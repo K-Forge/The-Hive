@@ -1,0 +1,16 @@
+[gd_resource type="ORMMaterial3D" format=3 uid="uid://byvw1hwf27gq3"]
+
+[ext_resource type="Texture2D" uid="uid://mb8lbhl8r384" path="res://assets/3DModels/ContainerTrailer/Textures/ContainerTrailer_01_Interior_BaseColor.png" id="1_4fvg1"]
+[ext_resource type="Texture2D" uid="uid://wf2gfn4pt7ua" path="res://assets/3DModels/ContainerTrailer/Textures/ContainerTrailer_01_Interior_Normal.png" id="2_hs3xs"]
+[ext_resource type="Texture2D" uid="uid://blaoahq8d7xdl" path="res://assets/3DModels/ContainerTrailer/Textures/ContainerTrailer_01_Interior_ORM.png" id="3_si5cq"]
+
+[resource]
+albedo_texture = ExtResource("1_4fvg1")
+orm_texture = ExtResource("3_si5cq")
+normal_enabled = true
+normal_texture = ExtResource("2_hs3xs")
+rim_enabled = true
+rim = 0.8
+rim_tint = 1.0
+ao_enabled = true
+ao_light_affect = 0.5

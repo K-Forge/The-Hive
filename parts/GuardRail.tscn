@@ -1,0 +1,34 @@
+[gd_scene format=4 uid="uid://bx5lff3sebgu7"]
+
+[ext_resource type="Script" uid="uid://c1444lr31fv6" path="res://src/GuardRail/guard_rail.gd" id="1_guardrail"]
+[ext_resource type="Shader" uid="uid://cfcar2nye4ktk" path="res://src/Conveyor/conveyor_frame_shader.gdshader" id="2_xhqoo"]
+[ext_resource type="Texture2D" uid="uid://b4rg48iqr8l2g" path="res://assets/3DModels/Textures/Metal.png" id="3_3rlp0"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_lgyts"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jr5vv"]
+render_priority = 0
+shader = ExtResource("2_xhqoo")
+shader_parameter/metal_texture = ExtResource("3_3rlp0")
+shader_parameter/color = Color(0.337, 0.655, 0.784, 1)
+shader_parameter/metallic_value = 0.3
+shader_parameter/roughness_value = 0.6
+shader_parameter/specular_value = 0.5
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_g5dan"]
+resource_local_to_scene = true
+size = Vector3(4, 1.07, 0.04)
+
+[node name="GuardRail" type="Node3D" unique_id=1476938650]
+script = ExtResource("1_guardrail")
+size = Vector3(4, 1.07, 0.04)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=2112366453]
+mesh = SubResource("ArrayMesh_lgyts")
+surface_material_override/0 = SubResource("ShaderMaterial_jr5vv")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1432854637]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=2135323907]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.535, 0)
+shape = SubResource("BoxShape3D_g5dan")

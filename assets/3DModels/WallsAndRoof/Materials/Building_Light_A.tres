@@ -1,0 +1,15 @@
+[gd_resource type="ORMMaterial3D" format=3 uid="uid://dwtalgpn7kh16"]
+
+[ext_resource type="Texture2D" uid="uid://btb4aly00chuf" path="res://assets/3DModels/WallsAndRoof/Textures/BuildingPart_Light_A_BaseColor.png" id="1_uicfx"]
+[ext_resource type="Texture2D" uid="uid://cvc4k75if2sw6" path="res://assets/3DModels/WallsAndRoof/Textures/BuildingPart_Light_A_Emissive.png" id="2_tvt5t"]
+[ext_resource type="Texture2D" uid="uid://dw35xug05it0o" path="res://assets/3DModels/WallsAndRoof/Textures/BuildingPart_Light_A_Normal.png" id="2_y4ij7"]
+[ext_resource type="Texture2D" uid="uid://c7ohvbvxu6a4c" path="res://assets/3DModels/WallsAndRoof/Textures/BuildingPart_Light_A_ORM.png" id="3_tvt5t"]
+
+[resource]
+albedo_texture = ExtResource("1_uicfx")
+orm_texture = ExtResource("3_tvt5t")
+emission_enabled = true
+emission_texture = ExtResource("2_tvt5t")
+normal_enabled = true
+normal_texture = ExtResource("2_y4ij7")
+ao_enabled = true

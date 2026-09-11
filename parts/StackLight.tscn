@@ -1,0 +1,114 @@
+[gd_scene format=3 uid="uid://drle8i15nwr68"]
+
+[ext_resource type="Script" uid="uid://btas2578kr5b7" path="res://src/StackLight/stack_light.gd" id="1_vxp13"]
+[ext_resource type="Script" uid="uid://bl7o7avq4pi78" path="res://src/StackLight/stack_light_data.gd" id="2_v0hgu"]
+[ext_resource type="Script" uid="uid://buet0tp11gjdl" path="res://src/StackLight/stack_segment_data.gd" id="6_vxp13"]
+[ext_resource type="PackedScene" uid="uid://dlm5s307lqs6b" path="res://src/StackLight/StackSegment.tscn" id="7_u0n62"]
+
+[sub_resource type="Resource" id="Resource_ys6q6"]
+resource_local_to_scene = true
+script = ExtResource("6_vxp13")
+
+[sub_resource type="Resource" id="Resource_vkogw"]
+resource_local_to_scene = true
+script = ExtResource("2_v0hgu")
+segment_datas = [SubResource("Resource_ys6q6")]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_snwui"]
+albedo_color = Color(0.09019608, 0.09411765, 0.105882354, 1)
+metallic = 0.25
+roughness = 0.5
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_vxp13"]
+top_radius = 0.03
+bottom_radius = 0.032
+height = 0.012
+radial_segments = 24
+rings = 1
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_v0hgu"]
+top_radius = 0.013
+bottom_radius = 0.013
+height = 0.184
+radial_segments = 24
+rings = 1
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_oqsfm"]
+top_radius = 0.035
+bottom_radius = 0.035
+height = 0.025
+radial_segments = 24
+rings = 1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w3ou4"]
+albedo_color = Color(0.9023144, 0.9157799, 0.9699511, 1)
+metallic = 0.1
+roughness = 0.5
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_bmr5a"]
+top_radius = 0.029
+bottom_radius = 0.029
+height = 0.05
+radial_segments = 24
+rings = 1
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_chyin"]
+top_radius = 0.0315
+bottom_radius = 0.035
+height = 0.014
+radial_segments = 24
+rings = 1
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_w3ou4"]
+resource_local_to_scene = true
+size = Vector3(0.073, 0.285, 0.073)
+
+[node name="StackLight" type="Node3D" unique_id=1223138583]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+script = ExtResource("1_vxp13")
+light_value = 0
+segments = 1
+_data = SubResource("Resource_vkogw")
+"Light 1" = SubResource("Resource_ys6q6")
+enable_comms = true
+tag_name = ""
+
+[node name="Foot" type="MeshInstance3D" parent="." unique_id=1143004030]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.006, 0)
+material_override = SubResource("StandardMaterial3D_snwui")
+mesh = SubResource("CylinderMesh_vxp13")
+
+[node name="Stem" type="MeshInstance3D" parent="." unique_id=1036328701]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.104, 0)
+material_override = SubResource("StandardMaterial3D_snwui")
+mesh = SubResource("CylinderMesh_v0hgu")
+
+[node name="Base" type="MeshInstance3D" parent="." unique_id=668075570]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2085, 0)
+material_override = SubResource("StandardMaterial3D_snwui")
+mesh = SubResource("CylinderMesh_oqsfm")
+
+[node name="Core" type="MeshInstance3D" parent="." unique_id=1062653787]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.246, 0)
+material_override = SubResource("StandardMaterial3D_w3ou4")
+mesh = SubResource("CylinderMesh_bmr5a")
+
+[node name="Segments" type="Node3D" parent="." unique_id=1108180490]
+
+[node name="StackSegment" parent="Segments" unique_id=677151403 instance=ExtResource("7_u0n62")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.246, 0)
+segment_data = SubResource("Resource_ys6q6")
+
+[node name="Rings" type="Node3D" parent="." unique_id=990011223]
+
+[node name="Cap" type="MeshInstance3D" parent="." unique_id=990011224]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.278, 0)
+material_override = SubResource("StandardMaterial3D_snwui")
+mesh = SubResource("CylinderMesh_chyin")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=769880711]
+collision_layer = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1673468325]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1425, 0)
+shape = SubResource("BoxShape3D_w3ou4")

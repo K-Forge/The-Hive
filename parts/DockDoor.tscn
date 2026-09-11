@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://dckdoor00part"]
+
+[ext_resource type="Script" uid="uid://mhypsp1t2odv" path="res://parts/dock_door.gd" id="1_dckdr"]
+[ext_resource type="PackedScene" uid="uid://bld7rvrtsdebn" path="res://assets/3DModels/DockDoor/DockDoor_Wall_A.tscn" id="2_krvhj"]
+[ext_resource type="PackedScene" uid="uid://di5cldbnuv77q" path="res://assets/3DModels/DockDoor/DockDoor_Wall_B.tscn" id="3_c0ola"]
+[ext_resource type="PackedScene" uid="uid://bre2hplg7f74j" path="res://assets/3DModels/DockDoor/DockDoor_Door_01.tscn" id="4_mb8y1"]
+
+[node name="DockDoor" type="Node3D" unique_id=356894458]
+script = ExtResource("1_dckdr")
+wall_a_scene = ExtResource("2_krvhj")
+wall_b_scene = ExtResource("3_c0ola")
+door_scene = ExtResource("4_mb8y1")

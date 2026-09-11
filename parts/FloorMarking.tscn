@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://dfl0rmrkng7x8"]
+
+[ext_resource type="Script" uid="uid://bretvtaevdlj8" path="res://src/FloorMarking/floor_marking.gd" id="1_mark"]
+[ext_resource type="Shader" uid="uid://ccp4uv16dn5my" path="res://src/FloorMarking/floor_marking.gdshader" id="2_6y07s"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6y07s"]
+render_priority = 0
+shader = ExtResource("2_6y07s")
+shader_parameter/primary_color = Color(0.9490196, 0.7176471, 0.019607844, 1)
+shader_parameter/secondary_color = Color(0.101960786, 0.101960786, 0.101960786, 1)
+shader_parameter/style = 1
+shader_parameter/stripe_size = 0.3
+shader_parameter/border_width = 0.1
+shader_parameter/marking_size = Vector2(2, 8)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_lbosk"]
+size = Vector2(2, 8)
+
+[node name="FloorMarking" type="Node3D" unique_id=970413264]
+script = ExtResource("1_mark")
+size = Vector3(2, 0.02, 8)
+metadata/hijack_scale = true
+
+[node name="MarkingMesh" type="MeshInstance3D" parent="." unique_id=1845411136]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, 0)
+material_override = SubResource("ShaderMaterial_6y07s")
+cast_shadow = 0
+mesh = SubResource("PlaneMesh_lbosk")

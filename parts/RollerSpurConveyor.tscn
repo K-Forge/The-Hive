@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://bldtmlhjmm1tv"]
+
+[ext_resource type="Script" uid="uid://41csetstrvqt" path="res://src/RollerConveyor/roller_spur_conveyor.gd" id="1_script"]
+
+[node name="RollerSpurConveyor" type="Node3D" unique_id=634096855]
+process_mode = 3
+script = ExtResource("1_script")
+size = Vector3(2, 0.5, 1.524)
