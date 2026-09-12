@@ -16,7 +16,12 @@ var _live_snap_shortcut: Shortcut
 
 func _enter_tree() -> void:
 	_editor_node = get_tree().root.get_child(0)
-	_editor_node.editor_layout_loaded.connect(_editor_layout_loaded)
+	# editor_layout_loaded only exists on OIP's custom Godot fork. Without it,
+	# the "New Simulation" toolbar button / auto-create-on-empty-project
+	# convenience simply doesn't run; everything else in this plugin still
+	# works normally.
+	if _editor_node.has_signal(&"editor_layout_loaded"):
+		_editor_node.connect(&"editor_layout_loaded", _editor_layout_loaded)
 
 	var editor_settings := EditorInterface.get_editor_settings()
 	var use_shortcut := Shortcut.new()
@@ -64,7 +69,9 @@ func _editor_layout_loaded() -> void:
 
 	if get_tree().edited_scene_root == null:
 		_create_new_simulation()
-		EditorInterface.mark_scene_as_saved()
+		# mark_scene_as_saved() only exists on OIP's custom Godot fork.
+		if EditorInterface.has_method(&"mark_scene_as_saved"):
+			EditorInterface.call(&"mark_scene_as_saved")
 
 
 func _process(_delta: float) -> void:
@@ -129,4 +136,6 @@ func _create_new_simulation() -> void:
 
 
 func _remove_new_simulation() -> void:
-	EditorInterface.remove_root_node()
+	# remove_root_node() only exists on OIP's custom Godot fork.
+	if EditorInterface.has_method(&"remove_root_node"):
+		EditorInterface.call(&"remove_root_node")

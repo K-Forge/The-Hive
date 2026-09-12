@@ -15,6 +15,7 @@ scene_library/cache/path="res://addons/scene-library/thumb_cache/"
 [application]
 
 config/name="Open Industry Project"
+run/main_scene="res://HiveParking.tscn"
 config/features=PackedStringArray("4.7", "Forward Plus")
 boot_splash/stretch_mode=0
 boot_splash/image="res://assets/png/splash.png"
@@ -22,6 +23,8 @@ run/scene_time_scale=1.0
 
 [autoload]
 
+Simulation="*res://src/Simulation/simulation.gd"
+OIPComms="*res://src/comms/oip_comms_stub.gd"
 ConveyorSnapping="*res://addons/oip_ui/Autoload/ConveyorSnapping.gd"
 StructureSnapping="*res://addons/oip_ui/Autoload/StructureSnapping.gd"
 OIPCommsService="*res://src/comms/oip_comms_service.gd"
@@ -47,6 +50,10 @@ gdscript/warnings/integer_division=2
 gdscript/warnings/narrowing_conversion=2
 gdscript/warnings/int_as_enum_without_cast=2
 gdscript/warnings/int_as_enum_without_match=2
+
+[dotnet]
+
+project/assembly_name="Open Industry Project"
 
 [editor]
 

@@ -84,8 +84,16 @@ static func snap_selected_conveyors() -> void:
 
 	var selection := EditorInterface.get_selection()
 	var selected_conveyors: Array[Node3D] = []
-	var target_conveyor := EditorInterface.get_active_node_3d()
-	
+	# get_active_node_3d() only exists on OIP's custom Godot fork; fall back to
+	# the last selected node on stock Godot.
+	var target_conveyor: Node3D = null
+	if EditorInterface.has_method(&"get_active_node_3d"):
+		target_conveyor = EditorInterface.call(&"get_active_node_3d") as Node3D
+	else:
+		var selected_nodes := selection.get_selected_nodes()
+		if selected_nodes.size() > 0:
+			target_conveyor = selected_nodes[-1] as Node3D
+
 	if not target_conveyor:
 		EditorInterface.get_editor_toaster().push_toast("No active node found - please click on a target conveyor first", EditorToaster.SEVERITY_WARNING)
 		return
